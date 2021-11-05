@@ -5,9 +5,9 @@ function Input(props) {
   const { type, nome, dataTestid } = props;
 
   const handleChange = ({ target: { name, value } }) => {
-    setLogin({
-      [name]: value,
-    });
+    // setLogin({
+    //   [name]: value,
+    // });
   };
 
   return (
