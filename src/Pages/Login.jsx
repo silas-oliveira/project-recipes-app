@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const MIN_PASSWORD_LENGTH = 6;
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -7,6 +9,11 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(email, password); // remover dps
+  };
+
+  const isValidEmail = (emailToTest) => {
+    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    return regex.test(emailToTest);
   };
 
   return (
@@ -36,6 +43,7 @@ function Login() {
         <button
           type="submit"
           data-testid="login-submit-btn"
+          disabled={ !(isValidEmail(email) && password.length > MIN_PASSWORD_LENGTH) }
         >
           Entrar
         </button>
