@@ -1,20 +1,45 @@
-import React from 'react';
-import Input from '../Components/Input';
-import Button from '../Components/Button';
+import React, { useState } from 'react';
 
 function Login() {
-  // const emailValidation = () => {
-  //   const { email } = ;// stado <<<<<<<<<<
-  //   const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-  //   return regex.test(String(email).toLowerCase());
-  // }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(email, password); // remover dps
+  };
 
   return (
     <div>
       <p>Login</p>
-      <Input type="email" nome="email" dataTestid="email-input" />
-      <Input type="password" nome="senha" dataTestid="password-input" />
-      <Button label="Entrar" dataTestid="login-submit-btn" />
+      <form onSubmit={ handleSubmit }>
+        <label htmlFor="email">
+          Email
+          <input
+            type="email"
+            name="email"
+            id="email"
+            data-testid="email-input"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </label>
+        <label htmlFor="password">
+          Senha
+          <input
+            type="password"
+            name="password"
+            id="password"
+            data-testid="password-input"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </label>
+        <button
+          type="submit"
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </button>
+      </form>
     </div>
   );
 }
