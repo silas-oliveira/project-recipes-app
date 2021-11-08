@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import searchApi from '../services/searchApi';
 
-function SearchBar() {
+function SearchBar(props) {
+  const { local } = props;
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
 
@@ -15,7 +17,7 @@ function SearchBar() {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
       return;
     }
-    searchApi(type, search);
+    searchApi(type, search, local);
   }
 
   return (
@@ -61,5 +63,9 @@ function SearchBar() {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  local: PropTypes.string.isRequired,
+};
 
 export default SearchBar;
