@@ -21,14 +21,14 @@ function SearchBar(props) {
       return;
     }
     const result = await searchApi(type, search, local);
-    console.log(result);
     if (!result) {
       global.alert(
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
+      return;
     }
     if (result && result.length === 1) {
-      history.push(`${key}/${result[key === 'bebidas' ? 'idDrink' : 'idFood']}`);
+      history.push(`${key}/${result[0][key === 'bebidas' ? 'idDrink' : 'idMeal']}`);
     }
   }
 
