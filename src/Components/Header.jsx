@@ -29,7 +29,7 @@ function Header(props) {
               alt="search Icon"
             />
           </button>) : null }
-      { showSearch ? <SearchBar /> : null }
+      { showSearch ? <SearchBar local={ title } /> : null }
     </header>
   );
 }
