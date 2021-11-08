@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addCocktailsToken, addMealsToken } from '../localStorage';
+import { addCocktailsToken, addMealsToken, saveUser } from '../localStorage';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -11,6 +11,7 @@ function Login() {
     e.preventDefault();
     addMealsToken(1);
     addCocktailsToken(1);
+    saveUser(email);
   };
 
   const isValidEmail = (emailToTest) => {
