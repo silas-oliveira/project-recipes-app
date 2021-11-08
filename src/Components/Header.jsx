@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SeachBar';
 
 function Header(props) {
   const { title, search } = props;
+  const [showSearch, setShowSearch] = useState(false);
+
   return (
     <header>
       <span data-testid="page-title">{title}</span>
@@ -17,11 +20,16 @@ function Header(props) {
         />
       </Link>
       <span data-testid="page-title">Title</span>
-      { search ? <img
-        data-testid="search-top-btn"
-        src={ searchIcon }
-        alt="search Icon"
-      /> : null }
+      { search
+        ? (
+          <button type="button" onClick={ () => setShowSearch(!showSearch) }>
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="search Icon"
+            />
+          </button>) : null }
+      { showSearch ? <SearchBar /> : null }
     </header>
   );
 }
