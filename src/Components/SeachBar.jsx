@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import searchApi from '../services/searchApi';
 
 function SearchBar(props) {
+  const history = useHistory();
   const { local } = props;
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
@@ -11,13 +13,23 @@ function SearchBar(props) {
     setType(e.target.value);
   }
 
-  function makeSearch(e) {
+  async function makeSearch(e) {
+    const key = local.toLowerCase();
     e.preventDefault();
     if (type === 'Primeira letra' && search.length !== 1) {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
       return;
     }
-    searchApi(type, search, local);
+    const result = await searchApi(type, search, local);
+    console.log(result);
+    if (!result) {
+      global.alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+    if (result && result.length === 1) {
+      history.push(`${key}/${result[key === 'bebidas' ? 'idDrink' : 'idFood']}`);
+    }
   }
 
   return (
