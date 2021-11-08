@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { addCocktailsToken, addMealsToken, saveUser } from '../localStorage';
 
 const MIN_PASSWORD_LENGTH = 6;
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,6 +14,7 @@ function Login() {
     addMealsToken(1);
     addCocktailsToken(1);
     saveUser(email);
+    history.push('/comidas');
   };
 
   const isValidEmail = (emailToTest) => {
