@@ -4,12 +4,14 @@ import ProvideAppReceita from './ContextAPI/ProvideAppReceita';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Pages/Login';
+import Comidas from './Pages/Comidas';
 
 function App() {
   return (
     <ProvideAppReceita>
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route exact path="/comidas" component={ Comidas } />
       </Switch>
     </ProvideAppReceita>
   );
