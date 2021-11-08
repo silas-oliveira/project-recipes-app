@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import searchApi from '../services/searchApi';
+import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
 function SearchBar(props) {
   const history = useHistory();
   const { local } = props;
+  const { setMeals, setDrinks } = useContext(ContextAppReceita);
   const [search, setSearch] = useState('');
   const [type, setType] = useState('');
 
@@ -30,6 +32,7 @@ function SearchBar(props) {
     if (result && result.length === 1) {
       history.push(`${key}/${result[0][key === 'bebidas' ? 'idDrink' : 'idMeal']}`);
     }
+    return key === 'bebidas' ? setDrinks(result) : setMeals(result);
   }
 
   return (
