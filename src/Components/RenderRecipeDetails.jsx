@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Video from './Video';
-import '../CSS/recommendations.css';
+import '../CSS/renderRecipeDetails.css';
 
 const MAX_RECOMENDATIONS = 6;
 
@@ -51,10 +51,10 @@ function RenderRecipeDetails(props) {
       )}
       <div>
         Recomendacao
-        <div className="recommendations-ul">
+        <div className="recommendations-div">
           { recommendations.slice(0, MAX_RECOMENDATIONS).map((recommendation, index) => (
             <div
-              className="recommendations-li"
+              className="recommendations-card"
               key={ index }
               data-testid={ `${index}-recomendation-card` }
             >
@@ -66,7 +66,13 @@ function RenderRecipeDetails(props) {
         </div>
       </div>
       <div>
-        <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="startRecipeButton"
+        >
+          Iniciar Receita
+        </button>
       </div>
     </div>
   );
