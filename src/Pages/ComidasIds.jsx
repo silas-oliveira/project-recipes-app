@@ -1,12 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-// import Video from '../Components/Video';
+import Video from '../Components/Video';
 
-function ComidasIds(props) {
-  const { index } = props;
-
-  // const { retorno da api, strYoutube } = api ;
-  // usar o retorno para renderizar as informações
+function ComidasIds() {
   return (
     <div>
       <div>
@@ -19,7 +14,7 @@ function ComidasIds(props) {
         <p data-testid="recipe-category">texto categoria</p>
       </div>
       <div>
-        <h4 data-testid={ `${index}-ingredient-name-and-measure` }>ingredientes</h4>
+        <h4 data-testid={ `${'0'}-ingredient-name-and-measure` }>ingredientes</h4>
         {/* <ul>
               <li></li>
             </ul> */}
@@ -30,9 +25,9 @@ function ComidasIds(props) {
       </div>
       <div>
         <h4 data-testid="video">video</h4>
-        {/* <Video url={ strYoutube } /> */}
+        <Video url="https://www.youtube.com/watch?v=zUzd9KyIDrM" />
       </div>
-      <div data-testid={ `${index}-recomendation-card` }>
+      <div data-testid={ `${'0'}-recomendation-card` }>
         recomendadas
         {/* Talvez possa ser uma lista */}
       </div>
@@ -42,9 +37,5 @@ function ComidasIds(props) {
     </div>
   );
 }
-
-ComidasIds.propTypes = {
-  index: PropTypes.string.isRequired,
-};
 
 export default ComidasIds;

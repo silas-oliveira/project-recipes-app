@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Video from '../Components/Video';
 
-function BebidasIds(props) {
-  const { index } = props;
-
+function BebidasIds() {
   return (
     <div>
       <div>
@@ -16,7 +14,7 @@ function BebidasIds(props) {
         <p data-testid="recipe-category">texto categoria</p>
       </div>
       <div>
-        <h4 data-testid={ `${index}-ingredient-name-and-measure` }>ingredientes</h4>
+        <h4 data-testid={ `${'0'}-ingredient-name-and-measure` }>ingredientes</h4>
         {/* <ul>
               <li></li>
             </ul> */}
@@ -25,7 +23,11 @@ function BebidasIds(props) {
         <h4>Instrução</h4>
         <p data-testid="instructions"> texto de instrução </p>
       </div>
-      <div data-testid={ `${index}-recomendation-card` }>
+      <div>
+        <h4 data-testid="video">video</h4>
+        <Video url="https://www.youtube.com/watch?v=zUzd9KyIDrM" />
+      </div>
+      <div data-testid={ `${'0'}-recomendation-card` }>
         recomendadas
       </div>
       <div>
@@ -34,9 +36,5 @@ function BebidasIds(props) {
     </div>
   );
 }
-
-BebidasIds.propTypes = {
-  index: PropTypes.string.isRequired,
-};
 
 export default BebidasIds;
