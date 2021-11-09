@@ -12,18 +12,14 @@ function BebidasIds(props) {
     const { match: { params: { id } } } = props;
     setLoading(true);
     const response = await getById(id, 'bebidas');
+    const responseRec = await getRecomendations('comidas');
+    setRecomendations(responseRec);
     setDrink(response);
     setLoading(false);
   }
 
-  async function getDrinkRecomendations() {
-    const response = await getRecomendations('bebidas');
-    setRecomendations(response);
-  }
-
   useEffect(() => {
     getDrink();
-    getDrinkRecomendations();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

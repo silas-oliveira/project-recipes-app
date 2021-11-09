@@ -6,7 +6,7 @@ const RECOMENDATIONS_MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search
 const MAX_INGREDIENTS = 20;
 
 export async function getRecomendations(local) {
-  const URL = local !== 'bebidas' ? RECOMENDATIONS_DRINKS_URL : RECOMENDATIONS_MEALS_URL;
+  const URL = local === 'bebidas' ? RECOMENDATIONS_DRINKS_URL : RECOMENDATIONS_MEALS_URL;
   const response = await (await fetch(URL)).json();
   return response.meals || response.drinks;
 }

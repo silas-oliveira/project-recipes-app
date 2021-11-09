@@ -12,7 +12,7 @@ function ComidasIds(props) {
     const { match: { params: { id } } } = props;
     setLoading(true);
     const response = await getById(id, 'comidas');
-    const recomendationsRes = await getRecomendations('comidas');
+    const recomendationsRes = await getRecomendations('bebidas');
     setMeal(response);
     setRecomendations(recomendationsRes);
     setLoading(false);

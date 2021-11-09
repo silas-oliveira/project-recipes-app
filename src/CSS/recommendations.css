@@ -1,0 +1,11 @@
+.recommendations-ul {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.recommendations-li {
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  padding: 14px;
+}
