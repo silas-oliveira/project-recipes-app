@@ -23,6 +23,8 @@ export async function getById(id, local) {
         ingredients.push(
           `${result[0][`strIngredient${i}`]} - ${result[0][`strMeasure${i}`]}`,
         );
+      } else {
+        break;
       }
     }
     result[0].ingredients = ingredients;

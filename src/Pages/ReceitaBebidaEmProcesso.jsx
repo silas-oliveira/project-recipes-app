@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { getById } from '../services/getById';
+import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
 
-function ReceitaBebidaEmProcesso() {
+function ReceitaBebidaEmProcesso(props) {
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const { match: { params: { id } } } = props;
+    async function getRecipe() {
+      setLoading(true);
+      const response = await getById(id, 'bebidas');
+      setRecipe(response);
+      setLoading(false);
+    }
+    getRecipe();
+  }, [props]);
+
+  if (loading) return <div>Carregando...</div>;
   return (
-    <div>
-      <div>
-        <img src="" alt="" data-testid="recipe-photo" />
-        <div>
-          <h2 data-testid="recipe-title">Titulo</h2>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
-        </div>
-        <div>
-          <p data-testid="recipe-category">texto categoria</p>
-          <p data-testid={ `${index}-ingredient-step` }>ingredientes</p>
-        </div>
-        <div>
-          <p data-testid="instructions">Intrução</p>
-        </div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
-      </div>
-    </div>
+    <RenderRecipeInProgress
+      title={ recipe.strDrink }
+      image={ recipe.strDrinkThumb }
+      instructions={ recipe.strInstructions }
+      ingredients={ recipe.ingredients }
+      category={ recipe.strAlcoholic || recipe.strCategory }
+    />
   );
 }
+
+ReceitaBebidaEmProcesso.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default ReceitaBebidaEmProcesso;

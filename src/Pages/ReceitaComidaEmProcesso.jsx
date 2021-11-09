@@ -1,33 +1,41 @@
-import React from 'react';
-import Input from '../Components/Input';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { getById } from '../services/getById';
+import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
 
 function ReceitaComidaEmProcesso(props) {
-  const { match: { params: { id } } } = props;
+  const [recipe, setRecipe] = useState({});
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const { match: { params: { id } } } = props;
+    async function getRecipe() {
+      setLoading(true);
+      const response = await getById(id, 'comidas');
+      setRecipe(response);
+      setLoading(false);
+    }
+    getRecipe();
+  }, [props]);
+
+  if (loading) return <div>Carregando...</div>;
   return (
-    <div>
-      <div>
-        <img src="" alt="" data-testid="recipe-photo" />
-        <div>
-          <h2 data-testid="recipe-title">Titulo</h2>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
-        </div>
-        <div>
-          <p data-testid="recipe-category">texto categoria</p>
-          <p data-testid={ `${index}-ingredient-step` }>ingredientes</p>
-          {
-            ingredientes
-              .map((item) => (<Input key={ item } type="checkbox" />))
-          }
-        </div>
-        <div>
-          <p data-testid="instructions">Intrução</p>
-        </div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
-      </div>
-    </div>
+    <RenderRecipeInProgress
+      title={ recipe.strMeals }
+      image={ recipe.strMealThumb }
+      instructions={ recipe.strInstructions }
+      ingredients={ recipe.ingredients }
+      category={ recipe.strCategory }
+    />
   );
 }
+
+ReceitaComidaEmProcesso.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default ReceitaComidaEmProcesso;
