@@ -33,6 +33,7 @@ function BebidasIds(props) {
       ingredients={ drink.ingredients }
       instructions={ drink.strInstructions }
       recommendations={ recomendations }
+      type="bebidas"
     />
   );
 }

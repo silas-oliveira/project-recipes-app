@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Video from './Video';
-import { isDoneRecipe } from '../localStorage';
+import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
 import '../CSS/renderRecipeDetails.css';
 
 const MAX_RECOMENDATIONS = 6;
@@ -16,6 +16,7 @@ function RenderRecipeDetails(props) {
     category,
     instructions,
     recommendations,
+    type,
   } = props;
 
   return (
@@ -75,7 +76,7 @@ function RenderRecipeDetails(props) {
           className="startRecipeButton"
           style={ isDoneRecipe(id) ? { display: 'none' } : {} }
         >
-          Iniciar Receita
+          {isInProgressRecipes(id, type) ? 'Iniciar Receita' : 'Continuar Receita'}
         </button>
       </div>
     </div>
@@ -91,6 +92,7 @@ RenderRecipeDetails.propTypes = {
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
   recommendations: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 RenderRecipeDetails.defaultProps = {

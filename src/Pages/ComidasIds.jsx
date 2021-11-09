@@ -35,6 +35,7 @@ function ComidasIds(props) {
       instructions={ meal.strInstructions }
       ingredients={ meal.ingredients }
       recommendations={ recomendations }
+      type="comidas"
     />
   );
 }
