@@ -1,0 +1,17 @@
+.recommendations-div {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.recommendations-card {
+  display: inline-block;
+  padding: 14px;
+  text-align: center;
+  width: 51%;
+}
+
+.startRecipeButton {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
