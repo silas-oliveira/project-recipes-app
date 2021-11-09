@@ -26,7 +26,6 @@ export async function getById(id, local) {
       }
     }
     result[0].ingredients = ingredients;
-    console.log(result[0]);
     return result[0];
   }
   return {};

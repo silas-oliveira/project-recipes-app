@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Video from './Video';
+import { isDoneRecipe } from '../localStorage';
 import '../CSS/renderRecipeDetails.css';
 
 const MAX_RECOMENDATIONS = 6;
 
 function RenderRecipeDetails(props) {
   const {
+    id,
     image,
     title,
     video,
@@ -15,6 +17,7 @@ function RenderRecipeDetails(props) {
     instructions,
     recommendations,
   } = props;
+
   return (
     <div>
       <div>
@@ -70,6 +73,7 @@ function RenderRecipeDetails(props) {
           type="button"
           data-testid="start-recipe-btn"
           className="startRecipeButton"
+          style={ isDoneRecipe(id) ? { display: 'none' } : {} }
         >
           Iniciar Receita
         </button>
@@ -79,6 +83,7 @@ function RenderRecipeDetails(props) {
 }
 
 RenderRecipeDetails.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   video: PropTypes.string,

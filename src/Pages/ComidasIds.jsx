@@ -27,6 +27,7 @@ function ComidasIds(props) {
 
   return (
     <RenderRecipeDetails
+      id={ meal.idMeal }
       image={ meal.strMealThumb }
       title={ meal.strMeal }
       category={ meal.strCategory }

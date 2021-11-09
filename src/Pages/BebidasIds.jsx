@@ -26,6 +26,7 @@ function BebidasIds(props) {
   if (loading) return <h1>Loading...</h1>;
   return (
     <RenderRecipeDetails
+      id={ drink.idDrink }
       image={ drink.strDrinkThumb }
       title={ drink.strDrink }
       category={ drink.strAlcoholic || drink.strCategory }
