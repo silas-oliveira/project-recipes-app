@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Video from '../Components/Video';
+import getById from '../services/getById';
 
-function BebidasIds() {
+function BebidasIds(props) {
+  const [drink, setDrink] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  async function getDrink() {
+    const { match: { params: { id } } } = props;
+    setLoading(true);
+    const response = await getById(id, 'bebidas');
+    console.log(response);
+    setDrink(response);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getDrink();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
   return (
     <div>
       <div>
@@ -36,5 +56,13 @@ function BebidasIds() {
     </div>
   );
 }
+
+BebidasIds.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default BebidasIds;

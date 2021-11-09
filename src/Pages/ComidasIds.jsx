@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Video from '../Components/Video';
+import getById from '../services/getById';
 
-function ComidasIds() {
+function ComidasIds(props) {
+  const [meal, setMeal] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  async function getMeal() {
+    const { match: { params: { id } } } = props;
+    setLoading(true);
+    const response = await getById(id, 'comidas');
+    console.log(response);
+    setMeal(response);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    getMeal();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (loading) return <h1>Loading...</h1>;
+
   return (
     <div>
       <div>
@@ -37,5 +58,13 @@ function ComidasIds() {
     </div>
   );
 }
+
+ComidasIds.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default ComidasIds;
