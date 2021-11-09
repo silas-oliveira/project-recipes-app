@@ -1,9 +1,17 @@
 const MEAL_URL = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const RECOMENDATIONS_DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const RECOMENDATIONS_MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 const MAX_INGREDIENTS = 20;
 
-export default async function getById(id, local) {
+export async function getRecomendations(local) {
+  const URL = local !== 'bebidas' ? RECOMENDATIONS_DRINKS_URL : RECOMENDATIONS_MEALS_URL;
+  const response = await (await fetch(URL)).json();
+  return response.meals || response.drinks;
+}
+
+export async function getById(id, local) {
   const URL = `${local === 'bebidas' ? DRINKS_URL : MEAL_URL}${id}`;
   const response = await fetch(URL);
   const data = await response.json();
@@ -18,6 +26,7 @@ export default async function getById(id, local) {
       }
     }
     result[0].ingredients = ingredients;
+    console.log(result[0]);
     return result[0];
   }
   return {};

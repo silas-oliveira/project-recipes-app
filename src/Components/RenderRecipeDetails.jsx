@@ -54,7 +54,7 @@ function RenderRecipeDetails(props) {
               key={ index }
               data-testid={ `${index}-recomendation-card` }
             >
-              {recommendation}
+              {recommendation.strMeal || recommendation.strDrink}
             </li>
           ))}
         </ul>
@@ -73,7 +73,7 @@ RenderRecipeDetails.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   category: PropTypes.string.isRequired,
   instructions: PropTypes.string.isRequired,
-  recommendations: PropTypes.arrayOf(PropTypes.string).isRequired,
+  recommendations: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
 };
 
 RenderRecipeDetails.defaultProps = {
