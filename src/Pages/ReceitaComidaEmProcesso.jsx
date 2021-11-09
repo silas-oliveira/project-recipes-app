@@ -1,6 +1,9 @@
 import React from 'react';
+import Input from '../Components/Input';
 
-function ReceitaComidaEmProcesso() {
+function ReceitaComidaEmProcesso(props) {
+  const { match: { params: { id } } } = props;
+
   return (
     <div>
       <div>
@@ -13,6 +16,10 @@ function ReceitaComidaEmProcesso() {
         <div>
           <p data-testid="recipe-category">texto categoria</p>
           <p data-testid={ `${index}-ingredient-step` }>ingredientes</p>
+          {
+            ingredientes
+              .map((item) => (<Input key={ item } type="checkbox" />))
+          }
         </div>
         <div>
           <p data-testid="instructions">Intrução</p>
