@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories, getByCategory } from '../services/requestApi';
+import { getCategories, getByCategory, getDrinks, getMeals } from '../services/requestApi';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
 const MAX_CATEGORIES = 5;
@@ -8,6 +8,7 @@ const MAX_CATEGORIES = 5;
 function RenderCategories(props) {
   const { local } = props;
   const [categories, setCategories] = useState([]);
+  const [curCategory, setCurCategory] = useState('');
   const { setMeals, setDrinks } = useContext(ContextAppReceita);
 
   useEffect(() => {
@@ -19,9 +20,16 @@ function RenderCategories(props) {
   }, [local]);
 
   async function setCategorie(category) {
-    const result = await getByCategory(category, local);
-    if (local === 'bebidas') setDrinks(result);
-    else setMeals(result);
+    if (category !== curCategory) {
+      setCurCategory(category);
+      const result = await getByCategory(category, local);
+      if (local === 'bebidas') setDrinks(result);
+      else setMeals(result);
+    } else {
+      setCurCategory('');
+      if (local === 'bebidas') setDrinks(await getDrinks());
+      else setMeals(await getMeals());
+    }
   }
 
   return (
