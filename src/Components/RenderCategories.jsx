@@ -1,6 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { getCategories, getByCategory, getDrinks, getMeals } from '../services/requestApi';
+import {
+  getCategories,
+  getByCategory,
+  getDrinks,
+  getMeals } from '../services/requestApi';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
 const MAX_CATEGORIES = 5;
@@ -19,6 +23,12 @@ function RenderCategories(props) {
     getCategoriesFunc();
   }, [local]);
 
+  async function setDefaultCategory() {
+    setCurCategory('All');
+    if (local === 'bebidas') setDrinks(await getDrinks());
+    else setMeals(await getMeals());
+  }
+
   async function setCategorie(category) {
     if (category !== curCategory) {
       setCurCategory(category);
@@ -26,9 +36,7 @@ function RenderCategories(props) {
       if (local === 'bebidas') setDrinks(result);
       else setMeals(result);
     } else {
-      setCurCategory('');
-      if (local === 'bebidas') setDrinks(await getDrinks());
-      else setMeals(await getMeals());
+      setDefaultCategory();
     }
   }
 
@@ -39,12 +47,26 @@ function RenderCategories(props) {
           data-testid={ `${strCategory}-category-filter` }
           key={ strCategory }
           type="button"
-          className="btn btn-outline-primary m-1"
+          className={
+            `${strCategory === curCategory ? 'disabled' : null}
+            btn btn-outline-primary m-1`
+          }
           onClick={ () => setCategorie(strCategory) }
         >
           {strCategory}
         </button>
       ))}
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        className={
+          `${curCategory === 'All' ? 'disabled' : null}
+            btn btn-outline-primary m-1`
+        }
+        onClick={ () => setDefaultCategory() }
+      >
+        All
+      </button>
     </div>
   );
 }
