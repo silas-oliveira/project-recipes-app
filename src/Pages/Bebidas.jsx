@@ -7,6 +7,7 @@ const MAX_RECIPES = 12;
 
 function Bebidas() {
   const { drinks } = useContext(ContextAppReceita);
+
   return (
     <>
       <Header title="Bebidas" search />

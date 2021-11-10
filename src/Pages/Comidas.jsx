@@ -3,13 +3,16 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
+const MAX_RECIPES = 12;
+
 function Comidas() {
   const { meals } = useContext(ContextAppReceita);
+
   return (
     <div>
       <Header title="Comidas" search />
       <h1>Comidas</h1>
-      {meals.map((meal, index) => (
+      {meals.slice(0, MAX_RECIPES).map((meal, index) => (
         <div
           key={ meal.idMeal }
           data-testid={ `${index}-recipe-card` }

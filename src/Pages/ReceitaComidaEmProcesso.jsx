@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getById } from '../services/getById';
+import { getById } from '../services/requestApi';
 import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
 
 function ReceitaComidaEmProcesso(props) {
