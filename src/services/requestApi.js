@@ -4,6 +4,8 @@ const MEALS_URL = `${FOOD_URL}lookup.php?i=`;
 const GET_MEALS_URL = `${FOOD_URL}search.php?s=`;
 const DRINKS_URL = `${DRINK_URL}lookup.php?i=`;
 const GET_DRINKS_URL = `${DRINK_URL}search.php?s=`;
+const COCK_TAILS_RANDOM = `${DRINK_URL}random.php`;
+const RANDOM_MEAL = `${FOOD_URL}random.php`;
 
 const MAX_INGREDIENTS = 20;
 
@@ -62,3 +64,15 @@ export async function getById(id, local) {
   }
   return {};
 }
+
+export const getRandomCockTails = async () => {
+  const response = await fetch(`${COCK_TAILS_RANDOM}`);
+  const json = await response.json();
+  return json.drinks[0].idDrink;
+};
+
+export const getRandomMeal = async () => {
+  const response = await fetch(`${RANDOM_MEAL}`);
+  const json = await response.json();
+  return json.meals[0].idMeal;
+};
