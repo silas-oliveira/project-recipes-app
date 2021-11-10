@@ -8,20 +8,18 @@ function ComidasIds(props) {
   const [recomendations, setRecomendations] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  async function getMeal() {
-    const { match: { params: { id } } } = props;
-    setLoading(true);
-    const response = await getById(id, 'comidas');
-    const recomendationsRes = await getRecomendations('bebidas');
-    setMeal(response);
-    setRecomendations(recomendationsRes);
-    setLoading(false);
-  }
-
   useEffect(() => {
+    async function getMeal() {
+      const { match: { params: { id } } } = props;
+      setLoading(true);
+      const response = await getById(id, 'comidas');
+      const recomendationsRes = await getRecomendations('bebidas');
+      setMeal(response);
+      setRecomendations(recomendationsRes);
+      setLoading(false);
+    }
     getMeal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [props]);
 
   if (loading) return <h1>Loading...</h1>;
 
