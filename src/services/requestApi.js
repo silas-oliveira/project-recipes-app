@@ -69,7 +69,6 @@ export async function getById(id, local) {
 
 export async function getCategories(local) {
   const URL = local === 'bebidas' ? GET_DRINKS_CATEGORIES : GET_MEALS_CATEGORIES;
-  console.log(URL, local);
   const response = await fetch(URL);
   const data = await response.json();
   return data.meals || data.drinks;

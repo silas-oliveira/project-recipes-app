@@ -12,7 +12,7 @@ const MAX_CATEGORIES = 5;
 function RenderCategories(props) {
   const { local } = props;
   const [categories, setCategories] = useState([]);
-  const [curCategory, setCurCategory] = useState('');
+  const [curCategory, setCurCategory] = useState('All');
   const { setMeals, setDrinks } = useContext(ContextAppReceita);
 
   useEffect(() => {
