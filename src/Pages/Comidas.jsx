@@ -1,23 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
-import initialRequest from '../services/mealsAPI';
 
 const MAX_RECIPES = 12;
 
 function Comidas() {
-  const { meals, setMeals } = useContext(ContextAppReceita);
-
-  async function initialMeals() {
-    const getMeals = await initialRequest();
-    console.log(getMeals);
-    setMeals(getMeals);
-  }
-
-  useEffect(() => {
-    initialMeals();
-  }, []);
+  const { meals } = useContext(ContextAppReceita);
 
   return (
     <div>

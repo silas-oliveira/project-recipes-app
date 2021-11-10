@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getById, getRecomendations } from '../services/getById';
+import { getById, getMeals } from '../services/requestApi';
 import RenderRecipeDetails from '../Components/RenderRecipeDetails';
 
 function BebidasIds(props) {
@@ -13,7 +13,7 @@ function BebidasIds(props) {
       const { match: { params: { id } } } = props;
       setLoading(true);
       const response = await getById(id, 'bebidas');
-      const responseRec = await getRecomendations('comidas');
+      const responseRec = await getMeals();
       setRecomendations(responseRec);
       setDrink(response);
       setLoading(false);

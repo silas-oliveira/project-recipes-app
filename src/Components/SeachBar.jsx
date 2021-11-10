@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import searchApi from '../services/searchApi';
+import { searchApi } from '../services/requestApi';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
 function SearchBar(props) {

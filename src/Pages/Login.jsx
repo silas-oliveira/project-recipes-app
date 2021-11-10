@@ -9,12 +9,6 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // async function initialDrinks() {
-  //   const getDrinks = await initialRequest();
-  //   console.log(getDrinks);
-  //   setDrinks(getDrinks);
-  // }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     addMealsToken(1);
