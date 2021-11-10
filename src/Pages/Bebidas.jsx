@@ -1,12 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
+import initialRequestDrinks from '../services/drinksAPI';
 
 const MAX_RECIPES = 12;
 
 function Bebidas() {
-  const { drinks } = useContext(ContextAppReceita);
+  const { drinks, setDrinks } = useContext(ContextAppReceita);
+  console.log(drinks);
+
+  async function initialDrinks() {
+    const getDrinks = await initialRequestDrinks();
+    console.log(getDrinks);
+    setDrinks(getDrinks);
+  }
+
+  useEffect(() => {
+    initialDrinks();
+  }, []);
+
   return (
     <>
       <Header title="Bebidas" search />
