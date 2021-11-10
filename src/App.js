@@ -47,7 +47,7 @@ function App() {
           path="/explorar/comidas/ingredientes"
           component={ ExplorarComidasIngredientes }
         />
-        <Route 
+        <Route
           exact
           path="/explorar/bebidas/ingredientes"
           component={ ExplorarBebidasIngredientes }
