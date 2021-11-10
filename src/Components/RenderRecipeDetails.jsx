@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import Video from './Video';
 import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
@@ -79,9 +78,7 @@ function RenderRecipeDetails(props) {
           data-testid="start-recipe-btn"
           className="startRecipeButton"
           style={ isDoneRecipe(id) ? { display: 'none' } : {} }
-          onClick={ type === 'bebidas'
-            ? history.push(`/bebidas/${id}/in-progress`)
-            : history.push(`/comidas/${id}/in-progress`) }
+          onClick={ () => history.push(`/${type}/${id}/in-progress`) }
         >
           {isInProgressRecipes(id, type) ? 'Iniciar Receita' : 'Continuar Receita'}
         </button>
