@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
+import RenderCategories from '../Components/RenderCategories';
 
 const MAX_RECIPES = 12;
 
@@ -11,6 +12,7 @@ function Bebidas() {
   return (
     <>
       <Header title="Bebidas" search />
+      <RenderCategories local="bebidas" />
       <h1>Bebidas</h1>
       {drinks.slice(0, MAX_RECIPES).map((drink, index) => (
         <div
