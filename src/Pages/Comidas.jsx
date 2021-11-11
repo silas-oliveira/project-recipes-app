@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
+import RenderCategories from '../Components/RenderCategories';
 
 const MAX_RECIPES = 12;
 
@@ -11,9 +13,11 @@ function Comidas() {
   return (
     <div>
       <Header title="Comidas" search />
+      <RenderCategories local="comidas" />
       <h1>Comidas</h1>
       {meals.slice(0, MAX_RECIPES).map((meal, index) => (
-        <div
+        <Link
+          to={ `/comidas/${meal.idMeal}` }
           key={ meal.idMeal }
           data-testid={ `${index}-recipe-card` }
         >
@@ -21,11 +25,12 @@ function Comidas() {
             src={ meal.strMealThumb }
             alt="meal"
             data-testid={ `${index}-card-img` }
+            className="card-img"
           />
           <span data-testid={ `${index}-card-name` }>
             {meal.strMeal}
           </span>
-        </div>
+        </Link>
       ))}
       <Footer />
     </div>
