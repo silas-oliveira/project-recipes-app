@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
 import Video from './Video';
 import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
 import '../CSS/renderRecipeDetails.css';
+import shareIcon from '../images/exploreIcon.svg';
 
 const MAX_RECOMENDATIONS = 6;
 
@@ -20,7 +22,14 @@ function RenderRecipeDetails(props) {
     type,
   } = props;
 
+  const [copia, setCopia] = useState(false);
+
   const history = useHistory();
+
+  const clickCompartilhar = () => {
+    copy(window.location.href);
+    setCopia(true);
+  };
 
   return (
     <div>
@@ -29,7 +38,14 @@ function RenderRecipeDetails(props) {
       </div>
       <div>
         <h1 data-testid="recipe-title">{title}</h1>
-        <button type="button" data-testid="share-btn">compartilhar</button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ clickCompartilhar }
+        >
+          <img src={ shareIcon } alt="compartilhar" />
+          { copia && 'Link copiado!' }
+        </button>
         <button type="button" data-testid="favorite-btn">favoritar</button>
         <p data-testid="recipe-category">{category}</p>
       </div>
