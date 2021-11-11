@@ -5,7 +5,6 @@ import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
 import shareIcon from '../images/shareIcon.svg';
 import { catchDoneRecipes } from '../localStorage';
-import Footer from '../Components/Footer';
 
 function ReceitasFeitas() {
   const [copied, setCopied] = useState(false);
