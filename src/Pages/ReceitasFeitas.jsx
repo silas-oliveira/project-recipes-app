@@ -63,7 +63,7 @@ function ReceitasFeitas() {
   return (
     <div>
       <Header title="Receitas Feitas" />
-      <h1>Explorar ids</h1>
+      <h1>Receitas Feitas</h1>
       <RenderFilterBtn attribute="All" handleClick={ handleClick } />
       <RenderFilterBtn attribute="Food" handleClick={ handleClick } />
       <RenderFilterBtn attribute="Drinks" handleClick={ handleClick } />

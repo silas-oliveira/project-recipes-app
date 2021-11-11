@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
@@ -11,6 +11,8 @@ function RenderRecipeInProgress(props) {
     image,
     category,
   } = props;
+
+  const [checkedIngre, setCheckedIngre] = useState([]);
 
   return (
     <div>
@@ -29,7 +31,7 @@ function RenderRecipeInProgress(props) {
                 key={ index }
                 ingredient={ ingredient }
                 index={ index }
-                handleChange={ (checked, ingre) => console.log(checked, ingre) }
+                handleChange={ () => setCheckedIngre([...checkedIngre, ingredient]) }
               />
             ))}
           </div>
@@ -37,7 +39,13 @@ function RenderRecipeInProgress(props) {
         <div>
           <p data-testid="instructions">{instructions}</p>
         </div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ ingredients.length !== checkedIngre.length }
+        >
+          Finalizar Receita
+        </button>
       </div>
     </div>
   );
