@@ -6,6 +6,10 @@ const DRINKS_URL = `${DRINK_URL}lookup.php?i=`;
 const GET_DRINKS_URL = `${DRINK_URL}search.php?s=`;
 const COCK_TAILS_RANDOM = `${DRINK_URL}random.php`;
 const RANDOM_MEAL = `${FOOD_URL}random.php`;
+const GET_MEALS_CATEGORIES = `${FOOD_URL}list.php?c=list`;
+const GET_DRINKS_CATEGORIES = `${DRINK_URL}list.php?c=list`;
+const GET_MEAL_CATEGORY = `${FOOD_URL}filter.php?c=`;
+const GET_DRINK_CATEGORY = `${DRINK_URL}filter.php?c=`;
 
 const MAX_INGREDIENTS = 20;
 
@@ -76,3 +80,17 @@ export const getRandomMeal = async () => {
   const json = await response.json();
   return json.meals[0].idMeal;
 };
+
+export async function getCategories(local) {
+  const URL = local === 'bebidas' ? GET_DRINKS_CATEGORIES : GET_MEALS_CATEGORIES;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.meals || data.drinks;
+}
+
+export async function getByCategory(category, local) {
+  const URL = local === 'bebidas' ? GET_DRINK_CATEGORY : GET_MEAL_CATEGORY;
+  const response = await fetch(`${URL}${category}`);
+  const data = await response.json();
+  return data.meals || data.drinks;
+}
