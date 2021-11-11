@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function RenderFilterBtn(props) {
-  const { attribute } = props;
+  const { attribute, handleClick } = props;
   let type = attribute.toLowerCase();
   if (attribute === 'Drinks') {
     type = attribute.substring(0, attribute.length - 1).toLowerCase();
@@ -11,6 +11,7 @@ function RenderFilterBtn(props) {
     <button
       type="button"
       data-testid={ `filter-by-${type}-btn` }
+      onClick={ () => handleClick(attribute) }
     >
       {attribute}
     </button>
@@ -19,6 +20,7 @@ function RenderFilterBtn(props) {
 
 RenderFilterBtn.propTypes = {
   attribute: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default RenderFilterBtn;

@@ -31,6 +31,27 @@ function ReceitasFeitas() {
     },
   ];
 
+  const [filterRecipes, setFilterRecipes] = useState(doneRecipes);
+
+  const handleClick = (type) => {
+    const foodRecipes = doneRecipes.filter((recipe) => recipe.type === 'comida');
+    const drinkRecipes = doneRecipes.filter((recipe) => recipe.type === 'bebida');
+    switch (type) {
+    case 'Food':
+      setFilterRecipes(foodRecipes);
+      break;
+    case 'Drinks':
+      setFilterRecipes(drinkRecipes);
+      break;
+    case 'All':
+      setFilterRecipes(doneRecipes);
+      break;
+    default:
+      setCopied(doneRecipes);
+      break;
+    }
+  };
+
   const shareLink = (id, type) => {
     const standartLink = 'http://localhost:3000/';
     const generalType = `${type}s`;
@@ -42,11 +63,11 @@ function ReceitasFeitas() {
     <div>
       <Header title="Receitas Feitas" />
       <h1>Explorar ids</h1>
-      <RenderFilterBtn attribute="All" />
-      <RenderFilterBtn attribute="Food" />
-      <RenderFilterBtn attribute="Drinks" />
+      <RenderFilterBtn attribute="All" handleClick={ handleClick } />
+      <RenderFilterBtn attribute="Food" handleClick={ handleClick } />
+      <RenderFilterBtn attribute="Drinks" handleClick={ handleClick } />
 
-      {doneRecipes.map((recipe, i) => {
+      {filterRecipes.map((recipe, i) => {
         const { id, image, name, category, doneDate,
           tags, area, type, alcoholicOrNot } = recipe;
         return (
