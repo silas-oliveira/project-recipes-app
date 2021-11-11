@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { getAreas, getMealsByArea } from '../services/requestApi';
+import { getAreas, getMealsByArea, getMeals } from '../services/requestApi';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
 
 function RenderAreaOptions() {
@@ -16,13 +16,24 @@ function RenderAreaOptions() {
 
   async function changeArea(e) {
     const area = e.target.value;
-    const response = await getMealsByArea(area);
-    setMeals(response);
+    if (area === 'All') {
+      const response = await getMeals();
+      setMeals(response);
+    } else {
+      const response = await getMealsByArea(area);
+      setMeals(response);
+    }
   }
 
   return (
     <select data-testid="explore-by-area-dropdown" onChange={ changeArea }>
-      <option value="" defaultChecked>Selecione uma área</option>
+      <option
+        value="All"
+        data-testid="All-option"
+        defaultChecked
+      >
+        All
+      </option>
       {areas.map(({ strArea }) => (
         <option
           key={ strArea }

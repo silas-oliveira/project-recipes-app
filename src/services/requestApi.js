@@ -42,7 +42,6 @@ export async function searchApi(type, query, local) {
 export async function getMeals() {
   const response = await fetch(GET_MEALS_URL);
   const data = await response.json();
-  console.log(data)
   return data.meals;
 }
 
@@ -125,6 +124,5 @@ export async function getAreas() {
 export async function getMealsByArea(area) {
   const response = await fetch(`${FILTER_MEALS_BY_AREA}${area}`);
   const data = await response.json();
-  console.log(data)
   return data.meals;
 }
