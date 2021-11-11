@@ -5,7 +5,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 
 function ReceitasFavoritas() {
-  const [favites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     setFavorites(getFavorites());
@@ -19,7 +19,7 @@ function ReceitasFavoritas() {
       <button type="button" data-testid="filter-by-food-btn">Food</button>
       <button type="button" data-testid="filter-by-drink-btn">Drink</button>
       <div>
-        { favites.map((favorite, index) => (
+        { favorites !== null && favorites.map((favorite, index) => (
           <div key={ index }>
             <img
               src={ favorite.image }
