@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import copy from 'clipboard-copy';
 import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
 import shareIcon from '../images/shareIcon.svg';
 
 function ReceitasFeitas() {
+  const [copied, setCopied] = useState(false);
   const doneRecipes = [
     {
       id: '52771',
@@ -29,6 +31,13 @@ function ReceitasFeitas() {
     },
   ];
 
+  const shareLink = (id, type) => {
+    const standartLink = 'http://localhost:3000/';
+    const generalType = `${type}s`;
+    copy(`${standartLink}${generalType}/${id}`);
+    setCopied(true);
+  };
+
   return (
     <div>
       <Header title="Receitas Feitas" />
@@ -48,12 +57,13 @@ function ReceitasFeitas() {
             </h3>
             <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
             <p data-testid={ `${i}-horizontal-done-date` }>{`Feita em: ${doneDate}`}</p>
-            <button type="button">
+            <button type="button" onClick={ () => shareLink(id, type) }>
               <img
                 src={ shareIcon }
                 data-testid={ `${i}-horizontal-share-btn` }
                 alt="share"
               />
+              {copied && 'Link copiado!'}
             </button>
             {tags.map((tag, idx) => (
               <p
