@@ -18,14 +18,28 @@ function ReceitaComidaEmProcesso(props) {
     getRecipe();
   }, [props]);
 
+  const tags = recipe.strTags ? recipe.strTags.split(',') : [];
+
+  const chosenRecipe = {
+    id: recipe.idMeal,
+    type: 'comida',
+    area: recipe.strArea || '',
+    category: recipe.strCategory || '',
+    alcoholicOrNot: recipe.strAlcoholic || '',
+    name: recipe.strMeal,
+    image: recipe.strMealThumb,
+    tags: tags || [],
+  };
+
   if (loading) return <div>Carregando...</div>;
   return (
     <RenderRecipeInProgress
-      title={ recipe.strMeals }
+      title={ recipe.strMeal }
       image={ recipe.strMealThumb }
       instructions={ recipe.strInstructions }
       ingredients={ recipe.ingredients }
       category={ recipe.strCategory }
+      chosenRecipe={ chosenRecipe }
     />
   );
 }
