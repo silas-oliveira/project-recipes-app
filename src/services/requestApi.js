@@ -12,6 +12,7 @@ const GET_MEAL_CATEGORY = `${FOOD_URL}filter.php?c=`;
 const GET_DRINK_CATEGORY = `${DRINK_URL}filter.php?c=`;
 const GET_MEAL_INGREDIENTS = `${FOOD_URL}list.php?i=list`;
 const GET_DRINK_INGREDIENTS = `${DRINK_URL}list.php?i=list`;
+const GET_AREAS = `${FOOD_URL}list.php?a=list`;
 
 const MAX_INGREDIENTS = 20;
 
@@ -111,4 +112,10 @@ export async function getDrinksIngredients() {
   const response = await fetch(GET_DRINK_INGREDIENTS);
   const data = await response.json();
   return data.drinks;
+}
+
+export async function getAreas() {
+  const response = await fetch(GET_AREAS);
+  const data = await response.json();
+  return data.meals || data.drinks;
 }
