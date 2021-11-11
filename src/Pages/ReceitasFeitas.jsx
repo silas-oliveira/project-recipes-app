@@ -34,9 +34,9 @@ function ReceitasFeitas() {
   };
 
   const shareLink = (id, type, i) => {
-    const standartLink = window.location.href.replace('receitas-feitas', '');
-    const generalType = `${type}s`;
-    copy(`${standartLink}${generalType}/${id}`);
+    const standartLink = window.location.href;
+    const generalType = `${type}s/${id}`;
+    copy(standartLink.replace('receitas-feitas', generalType));
     setIndex(i);
     setCopied(true);
   };
