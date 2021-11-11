@@ -38,11 +38,14 @@ function ReceitasFeitas() {
       <RenderFilterBtn attribute="Drinks" />
 
       {doneRecipes.map((recipe, i) => {
-        const { id, image, name, category, doneDate, tags, area } = recipe;
+        const { id, image, name, category, doneDate,
+          tags, area, type, alcoholicOrNot } = recipe;
         return (
           <div key={ id }>
             <img src={ image } alt={ name } data-testid={ `${i}-horizontal-image` } />
-            <h3 data-testid={ `${i}-horizontal-top-text` }>{`${area} - ${category}`}</h3>
+            <h3 data-testid={ `${i}-horizontal-top-text` }>
+              { type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
+            </h3>
             <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
             <p data-testid={ `${i}-horizontal-done-date` }>{`Feita em: ${doneDate}`}</p>
             <button type="button">
