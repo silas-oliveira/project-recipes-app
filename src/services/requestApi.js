@@ -4,6 +4,8 @@ const MEALS_URL = `${FOOD_URL}lookup.php?i=`;
 const GET_MEALS_URL = `${FOOD_URL}search.php?s=`;
 const DRINKS_URL = `${DRINK_URL}lookup.php?i=`;
 const GET_DRINKS_URL = `${DRINK_URL}search.php?s=`;
+const COCK_TAILS_RANDOM = `${DRINK_URL}random.php`;
+const RANDOM_MEAL = `${FOOD_URL}random.php`;
 const GET_MEALS_CATEGORIES = `${FOOD_URL}list.php?c=list`;
 const GET_DRINKS_CATEGORIES = `${DRINK_URL}list.php?c=list`;
 const GET_MEAL_CATEGORY = `${FOOD_URL}filter.php?c=`;
@@ -66,6 +68,18 @@ export async function getById(id, local) {
   }
   return {};
 }
+
+export const getRandomCockTails = async () => {
+  const response = await fetch(`${COCK_TAILS_RANDOM}`);
+  const json = await response.json();
+  return json.drinks[0].idDrink;
+};
+
+export const getRandomMeal = async () => {
+  const response = await fetch(`${RANDOM_MEAL}`);
+  const json = await response.json();
+  return json.meals[0].idMeal;
+};
 
 export async function getCategories(local) {
   const URL = local === 'bebidas' ? GET_DRINKS_CATEGORIES : GET_MEALS_CATEGORIES;
