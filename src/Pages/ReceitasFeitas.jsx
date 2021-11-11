@@ -5,6 +5,7 @@ import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
 import shareIcon from '../images/shareIcon.svg';
 import { catchDoneRecipes } from '../localStorage';
+import Footer from '../Components/Footer';
 
 function ReceitasFeitas() {
   const [copied, setCopied] = useState(false);
@@ -46,7 +47,7 @@ function ReceitasFeitas() {
       <RenderFilterBtn attribute="Food" handleClick={ handleClick } />
       <RenderFilterBtn attribute="Drinks" handleClick={ handleClick } />
 
-      {filterRecipes.map((recipe, i) => {
+      {filterRecipes && filterRecipes.map((recipe, i) => {
         const { id, image, name, category, doneDate,
           tags, area, type, alcoholicOrNot } = recipe;
         return (
