@@ -11,7 +11,7 @@ function RenderRecipes(props) {
       {
         recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
           <Link
-            to={ `/${local}/${recipe.idDrink}` }
+            to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
             key={ recipe.idDrink || recipe.idMeal }
             data-testid={ `${index}-recipe-card` }
           >

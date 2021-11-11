@@ -13,6 +13,7 @@ const GET_DRINK_CATEGORY = `${DRINK_URL}filter.php?c=`;
 const GET_MEAL_INGREDIENTS = `${FOOD_URL}list.php?i=list`;
 const GET_DRINK_INGREDIENTS = `${DRINK_URL}list.php?i=list`;
 const GET_AREAS = `${FOOD_URL}list.php?a=list`;
+const FILTER_MEALS_BY_AREA = `${FOOD_URL}filter.php?a=`;
 
 const MAX_INGREDIENTS = 20;
 
@@ -41,6 +42,7 @@ export async function searchApi(type, query, local) {
 export async function getMeals() {
   const response = await fetch(GET_MEALS_URL);
   const data = await response.json();
+  console.log(data)
   return data.meals;
 }
 
@@ -118,4 +120,11 @@ export async function getAreas() {
   const response = await fetch(GET_AREAS);
   const data = await response.json();
   return data.meals || data.drinks;
+}
+
+export async function getMealsByArea(area) {
+  const response = await fetch(`${FILTER_MEALS_BY_AREA}${area}`);
+  const data = await response.json();
+  console.log(data)
+  return data.meals;
 }
