@@ -13,7 +13,6 @@ function ReceitaBebidaEmProcesso(props) {
       setLoading(true);
       const response = await getById(id, 'bebidas');
       setRecipe(response);
-      console.log(response);
       setLoading(false);
     }
     getRecipe();

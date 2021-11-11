@@ -5,10 +5,11 @@ import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
 import shareIcon from '../images/shareIcon.svg';
 import { catchDoneRecipes } from '../localStorage';
-import Footer from '../Components/Footer';
 
 function ReceitasFeitas() {
+  const INICIAL_INDEX = -1;
   const [copied, setCopied] = useState(false);
+  const [index, setIndex] = useState(INICIAL_INDEX);
   const doneRecipes = catchDoneRecipes();
 
   const [filterRecipes, setFilterRecipes] = useState(doneRecipes);
@@ -32,10 +33,11 @@ function ReceitasFeitas() {
     }
   };
 
-  const shareLink = (id, type) => {
-    const standartLink = 'http://localhost:3000/';
-    const generalType = `${type}s`;
-    copy(`${standartLink}${generalType}/${id}`);
+  const shareLink = (id, type, i) => {
+    const standartLink = window.location.href;
+    const generalType = `${type}s/${id}`;
+    copy(standartLink.replace('receitas-feitas', generalType));
+    setIndex(i);
     setCopied(true);
   };
 
@@ -67,13 +69,13 @@ function ReceitasFeitas() {
               <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
             </Link>
             <p data-testid={ `${i}-horizontal-done-date` }>{`Feita em: ${doneDate}`}</p>
-            <button type="button" onClick={ () => shareLink(id, type) }>
+            <button type="button" onClick={ () => shareLink(id, type, i) }>
               <img
                 src={ shareIcon }
                 data-testid={ `${i}-horizontal-share-btn` }
                 alt="share"
               />
-              {copied && 'Link copiado!'}
+              {copied && index === i && 'Link copiado!'}
             </button>
             {tags.map((tag, idx) => (
               <p
