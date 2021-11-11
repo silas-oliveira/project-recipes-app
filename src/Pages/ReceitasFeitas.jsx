@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
 import shareIcon from '../images/shareIcon.svg';
@@ -72,11 +73,20 @@ function ReceitasFeitas() {
           tags, area, type, alcoholicOrNot } = recipe;
         return (
           <div key={ id }>
-            <img src={ image } alt={ name } data-testid={ `${i}-horizontal-image` } />
+            <Link to={ `${type}s/${id}` }>
+              <img
+                width="300px"
+                src={ image }
+                alt={ name }
+                data-testid={ `${i}-horizontal-image` }
+              />
+            </Link>
             <h3 data-testid={ `${i}-horizontal-top-text` }>
               { type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
             </h3>
-            <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
+            <Link to={ `${type}s/${id}` }>
+              <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
+            </Link>
             <p data-testid={ `${i}-horizontal-done-date` }>{`Feita em: ${doneDate}`}</p>
             <button type="button" onClick={ () => shareLink(id, type) }>
               <img
