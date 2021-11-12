@@ -7,6 +7,28 @@ function Perfil() {
     <div>
       <Header title="Perfil" />
       <h1>Perfil</h1>
+      <p>
+        Email:
+        <span data-testid="profile-email">email</span>
+      </p>
+      <button
+        type="button"
+        data-testid="profile-done-btn"
+      >
+        Receitas feitas
+      </button>
+      <button
+        type="button"
+        data-testid="profile-favorite-btn"
+      >
+        Receitas Favoritas
+      </button>
+      <button
+        type="button"
+        data-testid="profile-logout-btn"
+      >
+        Sair
+      </button>
       <Footer />
     </div>
   );
