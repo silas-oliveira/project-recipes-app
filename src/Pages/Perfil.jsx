@@ -1,10 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { getUser } from '../localStorage';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 function Perfil() {
   const { email } = getUser();
+  const history = useHistory();
+
   return (
     <div>
       <Header title="Perfil" />
@@ -16,6 +19,7 @@ function Perfil() {
       <button
         type="button"
         data-testid="profile-done-btn"
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Receitas Feitas
       </button>
