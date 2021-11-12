@@ -1,15 +1,17 @@
 import React from 'react';
+import { getUser } from '../localStorage';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 function Perfil() {
+  const { email } = getUser();
   return (
     <div>
       <Header title="Perfil" />
       <h1>Perfil</h1>
       <p>
         Email:
-        <span data-testid="profile-email">email</span>
+        <span data-testid="profile-email">{email}</span>
       </p>
       <button
         type="button"

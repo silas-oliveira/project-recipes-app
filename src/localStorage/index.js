@@ -11,6 +11,11 @@ export function saveUser(email) {
   localStorage.setItem('user', user);
 }
 
+export function getUser() {
+  const user = localStorage.getItem('user');
+  return JSON.parse(user);
+}
+
 export function doneRecipe(recipe) {
   const actualDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const doneRecipes = actualDoneRecipes
