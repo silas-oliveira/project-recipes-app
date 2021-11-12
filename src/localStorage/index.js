@@ -13,7 +13,10 @@ export function saveUser(email) {
 
 export function getUser() {
   const user = localStorage.getItem('user');
-  return JSON.parse(user);
+  if (user) {
+    return JSON.parse(user);
+  }
+  return { email: 'default-email@email.com' };
 }
 
 export function exitUser() {
