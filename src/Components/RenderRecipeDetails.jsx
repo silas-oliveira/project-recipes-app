@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import Video from './Video';
 import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../CSS/renderRecipeDetails.css';
 
 const MAX_RECOMENDATIONS = 6;
@@ -20,7 +22,14 @@ function RenderRecipeDetails(props) {
     type,
   } = props;
 
+  const [favorited, setFavorited] = useState(false);
+
   const history = useHistory();
+
+  useEffect(() => {
+    const getRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    setFavorited(getRecipes.some((item) => (item.id).includes(id)));
+  }, [id]);
 
   return (
     <div>
@@ -30,7 +39,15 @@ function RenderRecipeDetails(props) {
       <div>
         <h1 data-testid="recipe-title">{title}</h1>
         <button type="button" data-testid="share-btn">compartilhar</button>
-        <button type="button" data-testid="favorite-btn">favoritar</button>
+        <button
+          type="button"
+          data-testid="favorite-btn"
+        >
+          <img
+            src={ favorited ? blackHeartIcon : whiteHeartIcon }
+            alt="Botão favoritar"
+          />
+        </button>
         <p data-testid="recipe-category">{category}</p>
       </div>
       <div>

@@ -25,3 +25,8 @@ export function isInProgressRecipes(id, type) {
   }
   return Object.keys(inProgressRecipes.cocktails).some((key) => key.id === id);
 }
+
+export function favoriteRecipes(id) {
+  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  return (favorites.some((favorite) => (favorite.id).includes(id)));
+}
