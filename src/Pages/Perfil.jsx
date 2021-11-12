@@ -17,7 +17,7 @@ function Perfil() {
         type="button"
         data-testid="profile-done-btn"
       >
-        Receitas feitas
+        Receitas Feitas
       </button>
       <button
         type="button"
