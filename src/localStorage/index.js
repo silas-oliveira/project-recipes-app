@@ -16,6 +16,15 @@ export function getUser() {
   return JSON.parse(user);
 }
 
+export function exitUser() {
+  localStorage.removeItem('user');
+  localStorage.removeItem('mealsToken');
+  localStorage.removeItem('cocktailsToken');
+  localStorage.removeItem('doneRecipes');
+  localStorage.removeItem('favoriteRecipes');
+  localStorage.removeItem('inProgressRecipes');
+}
+
 export function doneRecipe(recipe) {
   const actualDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const doneRecipes = actualDoneRecipes

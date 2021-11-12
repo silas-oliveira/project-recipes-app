@@ -1,12 +1,17 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { getUser } from '../localStorage';
+import { getUser, exitUser } from '../localStorage';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 
 function Perfil() {
   const { email } = getUser();
   const history = useHistory();
+
+  function exit() {
+    exitUser();
+    history.push('/');
+  }
 
   return (
     <div>
@@ -33,6 +38,7 @@ function Perfil() {
       <button
         type="button"
         data-testid="profile-logout-btn"
+        onClick={ () => exit() }
       >
         Sair
       </button>
