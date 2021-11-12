@@ -11,6 +11,23 @@ export function saveUser(email) {
   localStorage.setItem('user', user);
 }
 
+export function getUser() {
+  const user = localStorage.getItem('user');
+  if (user) {
+    return JSON.parse(user);
+  }
+  return { email: 'default-email@email.com' };
+}
+
+export function exitUser() {
+  localStorage.removeItem('user');
+  localStorage.removeItem('mealsToken');
+  localStorage.removeItem('cocktailsToken');
+  localStorage.removeItem('doneRecipes');
+  localStorage.removeItem('favoriteRecipes');
+  localStorage.removeItem('inProgressRecipes');
+}
+
 export function doneRecipe(recipe) {
   const actualDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   const doneRecipes = actualDoneRecipes
