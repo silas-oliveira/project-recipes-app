@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Video from './Video';
-import { isDoneRecipe, isInProgressRecipes, isFavoriteRecipe } from '../localStorage';
+import {
+  isDoneRecipe,
+  isInProgressRecipes,
+  isFavoriteRecipe,
+  updateFavorite } from '../localStorage';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../CSS/renderRecipeDetails.css';
@@ -22,6 +26,7 @@ function RenderRecipeDetails(props) {
     instructions,
     recommendations,
     type,
+    area,
   } = props;
 
   const [favorited, setFavorited] = useState(false);
@@ -38,6 +43,19 @@ function RenderRecipeDetails(props) {
     setCopia(true);
   };
 
+  function favButton() {
+    const curFav = {
+      id,
+      type: type === 'bebidas' ? 'bebida' : 'comida',
+      area,
+      category,
+      image,
+      name: title,
+    };
+    updateFavorite(curFav);
+    setFavorited(isFavoriteRecipe(id));
+  }
+
   return (
     <div>
       <div>
@@ -49,6 +67,7 @@ function RenderRecipeDetails(props) {
           type="button"
           data-testid="favorite-btn"
           src={ favorited ? blackHeartIcon : whiteHeartIcon }
+          onClick={ () => favButton() }
         >
           <img
             src={ favorited ? blackHeartIcon : whiteHeartIcon }
@@ -88,11 +107,14 @@ function RenderRecipeDetails(props) {
           <Video url={ video } />
         </div>
       )}
-      <div>
+      <div className="mb-4">
         Recomendacao
         <div className="recommendations-div">
           { recommendations.slice(0, MAX_RECOMENDATIONS).map((recommendation, index) => (
-            <div
+            <Link
+              to={ `/${type === 'bebidas'
+                ? 'comidas' : 'bebidas'}/${recommendation.idMeal
+                  || recommendation.idDrink}` }
               className="recommendations-card"
               key={ index }
               data-testid={ `${index}-recomendation-card` }
@@ -100,7 +122,7 @@ function RenderRecipeDetails(props) {
               <span data-testid={ `${index}-recomendation-title` }>
                 {recommendation.strMeal || recommendation.strDrink}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -129,10 +151,12 @@ RenderRecipeDetails.propTypes = {
   instructions: PropTypes.string.isRequired,
   recommendations: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   type: PropTypes.string.isRequired,
+  area: PropTypes.string,
 };
 
 RenderRecipeDetails.defaultProps = {
   video: '',
+  area: '',
 };
 
 export default RenderRecipeDetails;

@@ -61,5 +61,16 @@ export function isFavoriteRecipe(id) {
 
 export function getFavorites() {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  return favorites;
+  return favorites || [];
+}
+
+export function updateFavorite(fav) {
+  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  if (favorites.some((cur) => cur.id === fav.id)) {
+    const newFav = favorites.filter((cur) => cur.id !== fav.id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFav));
+  } else {
+    favorites.push(fav);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+  }
 }
