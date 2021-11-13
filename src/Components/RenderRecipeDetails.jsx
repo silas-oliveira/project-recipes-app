@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
 import Video from './Video';
-import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
+import { isDoneRecipe, isInProgressRecipes, isFavoriteRecipe } from '../localStorage';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../CSS/renderRecipeDetails.css';
+import shareIcon from '../images/exploreIcon.svg';
 
 const MAX_RECOMENDATIONS = 6;
 
@@ -23,13 +25,18 @@ function RenderRecipeDetails(props) {
   } = props;
 
   const [favorited, setFavorited] = useState(false);
+  const [copia, setCopia] = useState(false);
 
   const history = useHistory();
 
   useEffect(() => {
-    const getRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    setFavorited(getRecipes.some((item) => (item.id).includes(id)));
+    setFavorited(isFavoriteRecipe(id));
   }, [id]);
+
+  const clickCompartilhar = () => {
+    copy(window.location.href);
+    setCopia(true);
+  };
 
   return (
     <div>
@@ -38,15 +45,23 @@ function RenderRecipeDetails(props) {
       </div>
       <div>
         <h1 data-testid="recipe-title">{title}</h1>
-        <button type="button" data-testid="share-btn">compartilhar</button>
         <button
           type="button"
           data-testid="favorite-btn"
+          src={ favorited ? blackHeartIcon : whiteHeartIcon }
         >
           <img
             src={ favorited ? blackHeartIcon : whiteHeartIcon }
             alt="Botão favoritar"
           />
+        </button>
+        <button
+          type="button"
+          data-testid="share-btn"
+          onClick={ clickCompartilhar }
+        >
+          <img src={ shareIcon } alt="compartilhar" />
+          { copia && 'Link copiado!' }
         </button>
         <p data-testid="recipe-category">{category}</p>
       </div>

@@ -18,6 +18,19 @@ function ReceitaBebidaEmProcesso(props) {
     getRecipe();
   }, [props]);
 
+  const tags = recipe.strTags ? recipe.strTags.split(',') : [];
+
+  const chosenRecipe = {
+    id: recipe.idDrink,
+    type: 'bebida',
+    area: recipe.strArea || '',
+    category: recipe.strCategory || '',
+    alcoholicOrNot: recipe.strAlcoholic || '',
+    name: recipe.strDrink,
+    image: recipe.strDrinkThumb,
+    tags: tags || [],
+  };
+
   if (loading) return <div>Carregando...</div>;
   return (
     <RenderRecipeInProgress
@@ -26,6 +39,7 @@ function ReceitaBebidaEmProcesso(props) {
       instructions={ recipe.strInstructions }
       ingredients={ recipe.ingredients }
       category={ recipe.strAlcoholic || recipe.strCategory }
+      chosenRecipe={ chosenRecipe }
     />
   );
 }

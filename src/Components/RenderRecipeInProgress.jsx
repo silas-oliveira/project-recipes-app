@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { doneRecipe } from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
 
@@ -10,7 +12,23 @@ function RenderRecipeInProgress(props) {
     instructions,
     image,
     category,
+    chosenRecipe,
   } = props;
+
+  const [checkedIngre, setCheckedIngre] = useState([]);
+
+  const history = useHistory();
+
+  const handleFinishRecipe = () => {
+    const date = new Date();
+    const finishedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const finishedRecipe = {
+      ...chosenRecipe,
+      doneDate: finishedDate,
+    };
+    doneRecipe(finishedRecipe);
+    history.push('/receitas-feitas');
+  };
 
   return (
     <div>
@@ -29,7 +47,7 @@ function RenderRecipeInProgress(props) {
                 key={ index }
                 ingredient={ ingredient }
                 index={ index }
-                handleChange={ (checked, ingre) => console.log(checked, ingre) }
+                handleChange={ () => setCheckedIngre([...checkedIngre, ingredient]) }
               />
             ))}
           </div>
@@ -37,7 +55,14 @@ function RenderRecipeInProgress(props) {
         <div>
           <p data-testid="instructions">{instructions}</p>
         </div>
-        <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ ingredients.length !== checkedIngre.length }
+          onClick={ handleFinishRecipe }
+        >
+          Finalizar Receita
+        </button>
       </div>
     </div>
   );
@@ -49,6 +74,16 @@ RenderRecipeInProgress.propTypes = {
   instructions: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  chosenRecipe: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    area: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    alcoholicOrNot: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
 };
 
 export default RenderRecipeInProgress;
