@@ -27,7 +27,8 @@ function BebidasIds(props) {
       id={ drink.idDrink }
       image={ drink.strDrinkThumb }
       title={ drink.strDrink }
-      category={ drink.strAlcoholic || drink.strCategory }
+      category={ drink.strCategory }
+      alcoholic={ drink.strAlcoholic }
       ingredients={ drink.ingredients }
       instructions={ drink.strInstructions }
       recommendations={ recomendations }

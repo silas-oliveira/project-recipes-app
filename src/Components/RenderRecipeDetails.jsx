@@ -23,6 +23,7 @@ function RenderRecipeDetails(props) {
     video,
     ingredients,
     category,
+    alcoholic,
     instructions,
     recommendations,
     type,
@@ -51,6 +52,7 @@ function RenderRecipeDetails(props) {
       category,
       image,
       name: title,
+      alcoholicOrNot: alcoholic,
     };
     updateFavorite(curFav);
     setFavorited(isFavoriteRecipe(id));
@@ -82,7 +84,9 @@ function RenderRecipeDetails(props) {
           <img src={ shareIcon } alt="compartilhar" />
           { copia && 'Link copiado!' }
         </button>
-        <p data-testid="recipe-category">{category}</p>
+        <p data-testid="recipe-category">
+          {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category }
+        </p>
       </div>
       <div>
         <h4>Ingredientes</h4>
@@ -152,11 +156,13 @@ RenderRecipeDetails.propTypes = {
   recommendations: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   type: PropTypes.string.isRequired,
   area: PropTypes.string,
+  alcoholic: PropTypes.string,
 };
 
 RenderRecipeDetails.defaultProps = {
   video: '',
   area: '',
+  alcoholic: '',
 };
 
 export default RenderRecipeDetails;
