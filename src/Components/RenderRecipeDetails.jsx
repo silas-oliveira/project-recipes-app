@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
 import { useHistory, Link } from 'react-router-dom';
 import Video from './Video';
 import {
@@ -40,7 +39,8 @@ function RenderRecipeDetails(props) {
   }, [id]);
 
   const clickCompartilhar = () => {
-    copy(window.location.href);
+    window.navigator.clipboard.writeText(window.location.href)
+      .catch((err) => console.error('Error:', err));
     setCopia(true);
   };
 
