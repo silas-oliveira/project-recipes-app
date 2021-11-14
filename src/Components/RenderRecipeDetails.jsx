@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import copy from 'clipboard-copy';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import Video from './Video';
-import { isDoneRecipe, isInProgressRecipes } from '../localStorage';
+import {
+  isDoneRecipe,
+  isInProgressRecipes,
+  isFavoriteRecipe,
+  updateFavorite } from '../localStorage';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../CSS/renderRecipeDetails.css';
 import shareIcon from '../images/exploreIcon.svg';
 
@@ -17,19 +22,41 @@ function RenderRecipeDetails(props) {
     video,
     ingredients,
     category,
+    alcoholic,
     instructions,
     recommendations,
     type,
+    area,
   } = props;
 
+  const [favorited, setFavorited] = useState(false);
   const [copia, setCopia] = useState(false);
 
   const history = useHistory();
 
+  useEffect(() => {
+    setFavorited(isFavoriteRecipe(id));
+  }, [id]);
+
   const clickCompartilhar = () => {
-    copy(window.location.href);
+    window.navigator.clipboard.writeText(window.location.href)
+      .catch((err) => console.error('Error:', err));
     setCopia(true);
   };
+
+  function favButton() {
+    const curFav = {
+      id,
+      type: type === 'bebidas' ? 'bebida' : 'comida',
+      area,
+      category,
+      image,
+      name: title,
+      alcoholicOrNot: alcoholic,
+    };
+    updateFavorite(curFav);
+    setFavorited(isFavoriteRecipe(id));
+  }
 
   return (
     <div>
@@ -40,14 +67,26 @@ function RenderRecipeDetails(props) {
         <h1 data-testid="recipe-title">{title}</h1>
         <button
           type="button"
+          data-testid="favorite-btn"
+          src={ favorited ? blackHeartIcon : whiteHeartIcon }
+          onClick={ () => favButton() }
+        >
+          <img
+            src={ favorited ? blackHeartIcon : whiteHeartIcon }
+            alt="Botão favoritar"
+          />
+        </button>
+        <button
+          type="button"
           data-testid="share-btn"
           onClick={ clickCompartilhar }
         >
           <img src={ shareIcon } alt="compartilhar" />
           { copia && 'Link copiado!' }
         </button>
-        <button type="button" data-testid="favorite-btn">favoritar</button>
-        <p data-testid="recipe-category">{category}</p>
+        <p data-testid="recipe-category">
+          {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category }
+        </p>
       </div>
       <div>
         <h4>Ingredientes</h4>
@@ -72,11 +111,14 @@ function RenderRecipeDetails(props) {
           <Video url={ video } />
         </div>
       )}
-      <div>
+      <div className="mb-4">
         Recomendacao
         <div className="recommendations-div">
           { recommendations.slice(0, MAX_RECOMENDATIONS).map((recommendation, index) => (
-            <div
+            <Link
+              to={ `/${type === 'bebidas'
+                ? 'comidas' : 'bebidas'}/${recommendation.idMeal
+                  || recommendation.idDrink}` }
               className="recommendations-card"
               key={ index }
               data-testid={ `${index}-recomendation-card` }
@@ -84,7 +126,7 @@ function RenderRecipeDetails(props) {
               <span data-testid={ `${index}-recomendation-title` }>
                 {recommendation.strMeal || recommendation.strDrink}
               </span>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -113,10 +155,14 @@ RenderRecipeDetails.propTypes = {
   instructions: PropTypes.string.isRequired,
   recommendations: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   type: PropTypes.string.isRequired,
+  area: PropTypes.string,
+  alcoholic: PropTypes.string,
 };
 
 RenderRecipeDetails.defaultProps = {
   video: '',
+  area: '',
+  alcoholic: '',
 };
 
 export default RenderRecipeDetails;

@@ -35,7 +35,7 @@ export async function searchApi(type, query, local) {
       return null;
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

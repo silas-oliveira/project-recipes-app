@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
@@ -36,7 +35,10 @@ function ReceitasFeitas() {
   const shareLink = (id, type, i) => {
     const standartLink = window.location.href;
     const generalType = `${type}s/${id}`;
-    copy(standartLink.replace('receitas-feitas', generalType));
+    window.navigator.clipboard.writeText(
+      standartLink.replace('receitas-feitas', generalType),
+    )
+      .catch((err) => console.error('Error:', err));
     setIndex(i);
     setCopied(true);
   };
