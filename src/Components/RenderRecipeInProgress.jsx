@@ -61,7 +61,7 @@ function RenderRecipeInProgress(props) {
         <div>
           <h2 data-testid="recipe-title">{title}</h2>
           <CopyButton link={ window.location.href.replace('/in-progress', '') } />
-          <FavButton recipe={ curRecipe() } />
+          <FavButton recipe={ curRecipe() } dataTestId="favorite-btn" />
         </div>
         <div>
           <p data-testid="recipe-category">{category}</p>

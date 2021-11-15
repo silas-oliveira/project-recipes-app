@@ -45,7 +45,7 @@ function RenderRecipeDetails(props) {
       </div>
       <div>
         <h1 data-testid="recipe-title">{title}</h1>
-        <FavButton recipe={ curFav } />
+        <FavButton recipe={ curFav } dataTestId="favorite-btn" />
         <CopyButton link={ window.location.href } />
         <p data-testid="recipe-category">
           {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category }

@@ -87,6 +87,7 @@ function ReceitasFavoritas() {
               <FavButton
                 recipe={ favorite }
                 index={ index }
+                dataTestId={ `${index}-horizontal-favorite-btn` }
                 onClick={ () => setFavorites(getFavorites()) }
               />
             </div>
