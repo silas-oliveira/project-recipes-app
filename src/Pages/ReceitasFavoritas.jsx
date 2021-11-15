@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { getFavorites } from '../localStorage';
 import Header from '../Components/Header';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import shareIcon from '../images/shareIcon.svg';
+import RenderMultiplesShare from '../Components/RenderMultiplesShare';
+import FavButton from '../Components/FavButton';
 
 function ReceitasFavoritas() {
   const [favorites, setFavorites] = useState([]);
+  const [curIndex, setCurIndex] = useState('');
 
   useEffect(() => {
     setFavorites(getFavorites());
@@ -47,24 +48,23 @@ function ReceitasFavoritas() {
             <p
               data-testid={ `${index}-horizontal-top-text` }
             >
-              { `${favorite.area} - ${favorite.category}`}
+              { `${favorite.area || favorite.alcoholicOrNot} - ${favorite.category}`}
             </p>
             <p data-testid={ `${index}-horizontal-name` }>{ favorite.name }</p>
             <div>
-              <button
-                type="button"
-                src={ shareIcon }
-                data-testid={ `${index}-horizontal-share-btn` }
-              >
-                <img src={ shareIcon } alt="Compartilhar" />
-              </button>
-              <button
-                type="button"
-                data-testid={ `${index}-horizontal-favorite-btn` }
-                src={ blackHeartIcon }
-              >
-                <img src={ blackHeartIcon } alt="Favorite" />
-              </button>
+              <RenderMultiplesShare
+                id={ favorite.id }
+                type={ favorite.type }
+                index={ index }
+                copied={ curIndex === index }
+                replace="receitas-favoritas"
+                onClick={ () => setCurIndex(index) }
+              />
+              <FavButton
+                recipe={ favorite }
+                index={ index }
+                onClick={ () => setFavorites(getFavorites()) }
+              />
             </div>
           </div>
         )) }

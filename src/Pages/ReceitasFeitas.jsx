@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../Components/Header';
 import RenderFilterBtn from '../Components/RenderFilterBtn';
-import shareIcon from '../images/shareIcon.svg';
+import RenderMultiplesShare from '../Components/RenderMultiplesShare';
 import { catchDoneRecipes } from '../localStorage';
 
 function ReceitasFeitas() {
-  const INICIAL_INDEX = -1;
-  const [copied, setCopied] = useState(false);
-  const [index, setIndex] = useState(INICIAL_INDEX);
+  const [index, setIndex] = useState('');
   const doneRecipes = catchDoneRecipes();
 
   const [filterRecipes, setFilterRecipes] = useState(doneRecipes);
@@ -27,20 +25,8 @@ function ReceitasFeitas() {
       setFilterRecipes(doneRecipes);
       break;
     default:
-      setCopied(doneRecipes);
       break;
     }
-  };
-
-  const shareLink = (id, type, i) => {
-    const standartLink = window.location.href;
-    const generalType = `${type}s/${id}`;
-    window.navigator.clipboard.writeText(
-      standartLink.replace('receitas-feitas', generalType),
-    )
-      .catch((err) => console.error('Error:', err));
-    setIndex(i);
-    setCopied(true);
   };
 
   return (
@@ -71,14 +57,14 @@ function ReceitasFeitas() {
               <h3 data-testid={ `${i}-horizontal-name` }>{name}</h3>
             </Link>
             <p data-testid={ `${i}-horizontal-done-date` }>{`Feita em: ${doneDate}`}</p>
-            <button type="button" onClick={ () => shareLink(id, type, i) }>
-              <img
-                src={ shareIcon }
-                data-testid={ `${i}-horizontal-share-btn` }
-                alt="share"
-              />
-              {copied && index === i && 'Link copiado!'}
-            </button>
+            <RenderMultiplesShare
+              id={ id }
+              index={ i }
+              copied={ index === i }
+              type={ type }
+              replace="receitas-feitas"
+              onClick={ () => setIndex(i) }
+            />
             {tags.map((tag, idx) => (
               <p
                 key={ idx }

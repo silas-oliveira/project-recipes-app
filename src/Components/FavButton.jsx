@@ -5,18 +5,20 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FavButton(props) {
-  const { recipe } = props;
+  const { recipe, index, onClick } = props;
   const [favorited, setFavorited] = useState(isFavoriteRecipe(recipe.id));
 
   function favButton() {
     updateFavorite(recipe);
     setFavorited(isFavoriteRecipe(recipe.id));
+    onClick();
   }
 
   return (
     <button
       type="button"
-      data-testid="favorite-btn"
+      data-testid={ !Number.isNaN(index)
+        ? `${index}-horizontal-favorite-btn` : 'favorite-btn' }
       src={ favorited ? blackHeartIcon : whiteHeartIcon }
       onClick={ () => favButton() }
     >
@@ -38,6 +40,13 @@ FavButton.propTypes = {
     name: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
   }).isRequired,
+  index: PropTypes.number,
+  onClick: PropTypes.func,
+};
+
+FavButton.defaultProps = {
+  index: null,
+  onClick: () => {},
 };
 
 export default FavButton;
