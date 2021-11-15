@@ -34,12 +34,14 @@ function ReceitaComidaEmProcesso(props) {
   if (loading) return <div>Carregando...</div>;
   return (
     <RenderRecipeInProgress
+      id={ recipe.idMeal }
       title={ recipe.strMeal }
       image={ recipe.strMealThumb }
       instructions={ recipe.strInstructions }
       ingredients={ recipe.ingredients }
       category={ recipe.strCategory }
       chosenRecipe={ chosenRecipe }
+      type="comida"
     />
   );
 }

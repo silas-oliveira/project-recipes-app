@@ -45,6 +45,22 @@ export function isDoneRecipe(id) {
   return doneRecipes.some((recipe) => recipe.id === id);
 }
 
+export function setInProgressRecipe(id, array, type) {
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const local = type === 'bebida' ? 'cocktails' : 'meals';
+  if (!inProgressRecipes) {
+    const newInProgressRecipes = {
+      cocktails: {},
+      meals: {},
+    };
+    newInProgressRecipes[local][id] = array;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgressRecipes));
+  } else {
+    inProgressRecipes[local][id] = array;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  }
+}
+
 export function isInProgressRecipes(id, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (!inProgressRecipes) return false;
@@ -52,6 +68,13 @@ export function isInProgressRecipes(id, type) {
     return Object.keys(inProgressRecipes.meals).some((key) => key.id === id);
   }
   return Object.keys(inProgressRecipes.cocktails).some((key) => key.id === id);
+}
+
+export function getRecipeInProgress(id, type) {
+  const inProgessRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const local = type === 'bebida' ? 'cocktails' : 'meals';
+  if (inProgessRecipe) return inProgessRecipe[local][id] || [];
+  return [];
 }
 
 export function isFavoriteRecipe(id) {

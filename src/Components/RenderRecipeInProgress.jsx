@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { doneRecipe } from '../localStorage';
+import { doneRecipe, setInProgressRecipe, getRecipeInProgress } from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
 
 function RenderRecipeInProgress(props) {
   const {
+    id,
     title,
     ingredients,
     instructions,
     image,
     category,
     chosenRecipe,
+    type,
   } = props;
 
-  const [checkedIngre, setCheckedIngre] = useState([]);
+  const [checkedIngre, setCheckedIngre] = useState(getRecipeInProgress(id, type));
 
   const history = useHistory();
 
@@ -27,6 +29,21 @@ function RenderRecipeInProgress(props) {
     };
     doneRecipe(finishedRecipe);
     history.push('/receitas-feitas');
+  };
+
+  const handleCheckbox = (ingredient) => {
+    if (checkedIngre.includes(ingredient)) {
+      const newCheckedIngre = checkedIngre.filter(
+        (curIngredient) => curIngredient !== ingredient,
+      );
+      setCheckedIngre(newCheckedIngre);
+      setInProgressRecipe(id, newCheckedIngre, type);
+      return false;
+    }
+    const newCheckedIngre = [...checkedIngre, ingredient];
+    setCheckedIngre(newCheckedIngre);
+    setInProgressRecipe(id, newCheckedIngre, type);
+    return true;
   };
 
   return (
@@ -46,7 +63,8 @@ function RenderRecipeInProgress(props) {
                 key={ index }
                 ingredient={ ingredient }
                 index={ index }
-                handleChange={ () => setCheckedIngre([...checkedIngre, ingredient]) }
+                handleChange={ () => handleCheckbox(ingredient) }
+                checked={ checkedIngre.includes(ingredient) }
               />
             ))}
           </div>
@@ -68,11 +86,13 @@ function RenderRecipeInProgress(props) {
 }
 
 RenderRecipeInProgress.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
   instructions: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   chosenRecipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,

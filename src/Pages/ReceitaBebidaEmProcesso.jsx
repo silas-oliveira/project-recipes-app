@@ -34,12 +34,14 @@ function ReceitaBebidaEmProcesso(props) {
   if (loading) return <div>Carregando...</div>;
   return (
     <RenderRecipeInProgress
+      id={ recipe.idDrink }
       title={ recipe.strDrink }
       image={ recipe.strDrinkThumb }
       instructions={ recipe.strInstructions }
       ingredients={ recipe.ingredients }
       category={ recipe.strAlcoholic || recipe.strCategory }
       chosenRecipe={ chosenRecipe }
+      type="bebida"
     />
   );
 }
