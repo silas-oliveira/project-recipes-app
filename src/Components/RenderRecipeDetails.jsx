@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import Video from './Video';
 import {
   isDoneRecipe,
-  isInProgressRecipes,
-  isFavoriteRecipe,
-  updateFavorite } from '../localStorage';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+  isInProgressRecipes } from '../localStorage';
+import FavButton from './FavButton';
 import '../CSS/renderRecipeDetails.css';
 import shareIcon from '../images/exploreIcon.svg';
 
@@ -29,14 +26,9 @@ function RenderRecipeDetails(props) {
     area,
   } = props;
 
-  const [favorited, setFavorited] = useState(false);
   const [copia, setCopia] = useState(false);
 
   const history = useHistory();
-
-  useEffect(() => {
-    setFavorited(isFavoriteRecipe(id));
-  }, [id]);
 
   const clickCompartilhar = () => {
     window.navigator.clipboard.writeText(window.location.href)
@@ -44,19 +36,15 @@ function RenderRecipeDetails(props) {
     setCopia(true);
   };
 
-  function favButton() {
-    const curFav = {
-      id,
-      type: type === 'bebidas' ? 'bebida' : 'comida',
-      area,
-      category,
-      image,
-      name: title,
-      alcoholicOrNot: alcoholic,
-    };
-    updateFavorite(curFav);
-    setFavorited(isFavoriteRecipe(id));
-  }
+  const curFav = {
+    id,
+    type: type === 'bebidas' ? 'bebida' : 'comida',
+    area,
+    category,
+    image,
+    name: title,
+    alcoholicOrNot: alcoholic,
+  };
 
   return (
     <div>
@@ -65,17 +53,7 @@ function RenderRecipeDetails(props) {
       </div>
       <div>
         <h1 data-testid="recipe-title">{title}</h1>
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          src={ favorited ? blackHeartIcon : whiteHeartIcon }
-          onClick={ () => favButton() }
-        >
-          <img
-            src={ favorited ? blackHeartIcon : whiteHeartIcon }
-            alt="Botão favoritar"
-          />
-        </button>
+        <FavButton recipe={ curFav } />
         <button
           type="button"
           data-testid="share-btn"

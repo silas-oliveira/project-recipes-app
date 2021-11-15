@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import FavButton from './FavButton';
 import { doneRecipe, setInProgressRecipe, getRecipeInProgress } from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
+import shareIcon from '../images/exploreIcon.svg';
 import '../CSS/recipeInProgress.css';
 
 function RenderRecipeInProgress(props) {
@@ -18,6 +20,7 @@ function RenderRecipeInProgress(props) {
   } = props;
 
   const [checkedIngre, setCheckedIngre] = useState(getRecipeInProgress(id, type));
+  const [copia, setCopia] = useState(false);
 
   const history = useHistory();
 
@@ -46,14 +49,33 @@ function RenderRecipeInProgress(props) {
     return true;
   };
 
+  const clickCompartilhar = () => {
+    window.navigator.clipboard.writeText(window.location.href.replace('/in-progress', ''))
+      .catch((err) => console.error('Error:', err));
+    setCopia(true);
+  };
+
+  const curRecipe = () => {
+    const newRecipe = { ...chosenRecipe };
+    delete newRecipe.tags;
+    return newRecipe;
+  };
+
   return (
     <div>
       <div>
         <img src={ image } alt="Recipe" data-testid="recipe-photo" />
         <div>
           <h2 data-testid="recipe-title">{title}</h2>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ clickCompartilhar }
+          >
+            <img src={ shareIcon } alt="compartilhar" />
+            {copia && 'Link copiado!'}
+          </button>
+          <FavButton recipe={ curRecipe() } />
         </div>
         <div>
           <p data-testid="recipe-category">{category}</p>
