@@ -67,6 +67,7 @@ function ReceitasFavoritas() {
                 src={ favorite.image }
                 alt={ favorite.name }
                 data-testid={ `${index}-horizontal-image` }
+                className="card-img"
               />
               <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
             </Link>
