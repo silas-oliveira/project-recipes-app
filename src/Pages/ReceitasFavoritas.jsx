@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getFavorites } from '../localStorage';
 import Header from '../Components/Header';
 import RenderMultiplesShare from '../Components/RenderMultiplesShare';
@@ -61,17 +62,19 @@ function ReceitasFavoritas() {
       <div>
         { favorites !== null && favorites.map((favorite, index) => (
           <div key={ index }>
-            <img
-              src={ favorite.image }
-              alt={ favorite.name }
-              data-testid={ `${index}-horizontal-image` }
-            />
+            <Link to={ `/${favorite.type}s/${favorite.id}` }>
+              <img
+                src={ favorite.image }
+                alt={ favorite.name }
+                data-testid={ `${index}-horizontal-image` }
+              />
+              <p data-testid={ `${index}-horizontal-name` }>{favorite.name}</p>
+            </Link>
             <p
               data-testid={ `${index}-horizontal-top-text` }
             >
               { `${favorite.area || favorite.alcoholicOrNot} - ${favorite.category}`}
             </p>
-            <p data-testid={ `${index}-horizontal-name` }>{ favorite.name }</p>
             <div>
               <RenderMultiplesShare
                 id={ favorite.id }
