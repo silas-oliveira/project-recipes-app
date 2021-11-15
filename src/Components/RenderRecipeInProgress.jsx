@@ -20,11 +20,10 @@ function RenderRecipeInProgress(props) {
   const history = useHistory();
 
   const handleFinishRecipe = () => {
-    const date = new Date();
-    const finishedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    const doneDate = new Date().toLocaleDateString('pt-BR');
     const finishedRecipe = {
       ...chosenRecipe,
-      doneDate: finishedDate,
+      doneDate,
     };
     doneRecipe(finishedRecipe);
     history.push('/receitas-feitas');
