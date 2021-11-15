@@ -13,7 +13,8 @@ function CheckboxIngredients(props) {
   const { ingredient, index } = props;
 
   return (
-    <p
+    <label
+      htmlFor={ ingredient }
       data-testid={ `${index}-ingredient-step` }
       className={ checked ? 'checked' : '' }
     >
@@ -21,11 +22,11 @@ function CheckboxIngredients(props) {
       <input
         value={ ingredient }
         type="checkbox"
-        id={ index }
+        id={ ingredient }
         checked={ checked }
         onChange={ handleChangeComponent }
       />
-    </p>
+    </label>
   );
 }
 
