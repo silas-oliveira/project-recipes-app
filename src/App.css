@@ -73,13 +73,13 @@
 }
 
 .img-card {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   width: 100%;
-  border-top-left-radius: 0.50rem;
-  border-top-right-radius: 0.50rem;
 }
 
 .shadow-custom {
-  box-shadow: 2px 7px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 2.5px 3px rgba(0, 0, 0, 0.5);
 }
 
 .btn-shadow-custom {
@@ -87,16 +87,16 @@
 }
 
 .border-card-custom {
-  border-radius: 0.60rem;
   border: 1px solid #b0b6c2;
+  border-radius: 10px;
 }
 
 .remove-button-default-style {
   background: none;
-	color: inherit;
-	border: none;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
 }
