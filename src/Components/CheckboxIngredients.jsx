@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 function CheckboxIngredients(props) {
-  const [checked, setChecked] = useState(false);
+  const { ingredient, index, checked: checkedProps } = props;
+
+  const [checked, setChecked] = useState(checkedProps);
 
   const handleChangeComponent = () => {
-    const { handleChange, ingredient } = props;
-    handleChange(!checked, ingredient);
-    setChecked(!checked);
+    const { handleChange } = props;
+    setChecked(handleChange());
   };
 
-  const { ingredient, index } = props;
-
   return (
-    <p
+    <label
+      htmlFor={ ingredient }
       data-testid={ `${index}-ingredient-step` }
       className={ checked ? 'checked' : '' }
     >
@@ -21,11 +21,11 @@ function CheckboxIngredients(props) {
       <input
         value={ ingredient }
         type="checkbox"
-        id={ index }
+        id={ ingredient }
         checked={ checked }
         onChange={ handleChangeComponent }
       />
-    </p>
+    </label>
   );
 }
 
@@ -33,6 +33,7 @@ CheckboxIngredients.propTypes = {
   ingredient: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   handleChange: PropTypes.func.isRequired,
+  checked: PropTypes.bool.isRequired,
 };
 
 export default CheckboxIngredients;
