@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
 import {
   getCategories,
   getByCategory,
@@ -41,32 +42,35 @@ function RenderCategories(props) {
   }
 
   return (
-    <div>
+    <div className="row">
       {categories.slice(0, MAX_CATEGORIES).map(({ strCategory }) => (
-        <button
-          data-testid={ `${strCategory}-category-filter` }
-          key={ strCategory }
+        <div key={ strCategory } className="p-1 col-sm-6 col-md-4 col-xl-2">
+          <Button
+            data-testid={ `${strCategory}-category-filter` }
+            type="button"
+            className={
+              `${strCategory === curCategory ? 'btn-secondary' : null}
+              btn-all-width btn-shadow-custom`
+            }
+            onClick={ () => setCategorie(strCategory) }
+          >
+            {strCategory}
+          </Button>
+        </div>
+      ))}
+      <div className="p-1 col-sm-6 col-md-4 col-xl-2">
+        <Button
+          data-testid="All-category-filter"
           type="button"
           className={
-            `${strCategory === curCategory ? 'disabled' : null}
-            btn btn-outline-primary m-1`
+            `${curCategory === 'All' ? 'btn-secondary' : null}
+            btn-all-width btn-shadow-custom`
           }
-          onClick={ () => setCategorie(strCategory) }
+          onClick={ () => setDefaultCategory() }
         >
-          {strCategory}
-        </button>
-      ))}
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        className={
-          `${curCategory === 'All' ? 'disabled' : null}
-            btn btn-outline-primary m-1`
-        }
-        onClick={ () => setDefaultCategory() }
-      >
-        All
-      </button>
+          All
+        </Button>
+      </div>
     </div>
   );
 }

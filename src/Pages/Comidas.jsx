@@ -9,13 +9,14 @@ function Comidas() {
   const { meals } = useContext(ContextAppReceita);
 
   return (
-    <div>
+    <>
       <Header title="Comidas" search />
-      <RenderCategories local="comidas" />
-      <h1>Comidas</h1>
-      <RenderRecipes recipes={ meals } local="comidas" />
+      <div className="container">
+        <RenderCategories local="comidas" />
+        <RenderRecipes recipes={ meals } local="comidas" />
+      </div>
       <Footer />
-    </div>
+    </>
 
   );
 }

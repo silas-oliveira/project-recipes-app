@@ -10,26 +10,36 @@ function Header(props) {
   const [showSearch, setShowSearch] = useState(false);
 
   return (
-    <header>
-      <span data-testid="page-title">{title}</span>
-      <Link to="/perfil">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="profile Icon"
-        />
-      </Link>
-      <span data-testid="page-title">Title</span>
-      { search
-        ? (
-          <button type="button" onClick={ () => setShowSearch(!showSearch) }>
+    <header className="navbar navbar-light bg-light">
+      <div className="container nav nav-tabs">
+        <img alt="Logo" src={ profileIcon } width="102" height="30" />
+        <span data-testid="page-title" className="h2 text-bolder">{title}</span>
+        <div className="d-flex align-items-center">
+          <Link to="/perfil">
             <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="search Icon"
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profile Icon"
             />
-          </button>) : null }
-      { showSearch ? <SearchBar local={ title } /> : null }
+          </Link>
+          {search
+            ? (
+              <div className="remove-button-default-style nav-item ms-2">
+                <button
+                  type="button"
+                  onClick={ () => setShowSearch(!showSearch) }
+                  className={ `${showSearch ? 'active' : ''} nav-link` }
+                >
+                  <img
+                    data-testid="search-top-btn"
+                    src={ searchIcon }
+                    alt="search Icon"
+                  />
+                </button>
+              </div>) : null}
+        </div>
+      </div>
+      {showSearch ? <SearchBar local={ title } /> : null}
     </header>
   );
 }
