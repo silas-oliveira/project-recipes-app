@@ -11,7 +11,7 @@ function RenderRecipes(props) {
       {
         recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
           <div key={ recipe.idDrink || recipe.idMeal } className="col-6 col-lg-4 p-2">
-            <div className="shadow-custom border-card-custom">
+            <div className="shadow-custom border-card-custom position-relative">
               <Link
                 to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
                 data-testid={ `${index}-recipe-card` }
@@ -25,7 +25,7 @@ function RenderRecipes(props) {
                 />
                 <p
                   data-testid={ `${index}-card-name` }
-                  className="mt-4 mb-3 ms-2 text-dark fs-4 font-monospace"
+                  className="text-white font-bolder fs-3 font-monospace recipe-name"
                 >
                   {recipe.strDrink || recipe.strMeal}
                 </p>
