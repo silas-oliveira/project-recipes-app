@@ -16,12 +16,17 @@ function CopyButton(props) {
 
   return (
     <>
-      {copy && <span className="">Link copiado!</span>}
+      {copy && (
+        <span
+          className="fs-4 text-shadow-custom text-white fw-bold font-monospace"
+        >
+          Link copiado!
+        </span>)}
       <button
         type="button"
         data-testid="share-btn"
         onClick={ onCopy }
-        className="remove-button-default-style ms-3"
+        className="remove-button-default-style me-3"
       >
         <img
           src={ shareIcon }

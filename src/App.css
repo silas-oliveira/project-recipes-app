@@ -105,6 +105,13 @@
   padding: 0;
 }
 
+.recipe-name-recommendation {
+  bottom: 15px;
+  font-weight: 700;
+  left: 10px;
+  position: absolute;
+}
+
 .recipe-name {
   bottom: 0;
   font-weight: 700;
@@ -117,7 +124,7 @@
 }
 
 .recipe-name-details {
-  bottom: 75px;
+  bottom: 80px;
   font-weight: 700;
   margin-left: 10px;
 }
@@ -140,8 +147,16 @@
   text-shadow: 1px 2px 2px black;
 }
 
+.recipe-name-recommendation, .text-shadow-custom {
+  text-shadow: 1px 2px 2px black;
+}
+
 .recipe-name, .recipe-name-details, .recipe-category-details, .fav-share-button-details {
   position: absolute;
+}
+
+.img-recommendation {
+  width: 100%;
 }
 
 .border-search-bar {

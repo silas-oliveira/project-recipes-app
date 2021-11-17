@@ -38,94 +38,117 @@ function RenderRecipeDetails(props) {
     alcoholicOrNot: alcoholic,
   };
 
+  function renderShareLikeButton() {
+    return (
+      <>
+        <FavButton recipe={ curFav } dataTestId="favorite-btn" />
+        <CopyButton link={ window.location.href } />
+      </>
+    );
+  }
+
   return (
-    <div className="container">
-      <div className="d-flex justify-content-center">
-        <div className="image-container position-relative mt-2">
-          <img
-            src={ image }
-            alt="Recipe"
-            data-testid="recipe-photo"
-            className="img-card"
-          />
-          <h1
-            data-testid="recipe-title"
-            className="recipe-name-details text-white mb-0"
-          >
-            {title}
-          </h1>
-          <p
-            data-testid="recipe-category"
-            className="recipe-category-details mb-0 text-white"
-          >
-            {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category}
-          </p>
-          <div className="fav-share-button-details">
-            <FavButton recipe={ curFav } dataTestId="favorite-btn" />
-            <CopyButton link={ window.location.href } />
+    <>
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <div className="image-container position-relative mt-2">
+            <img
+              src={ image }
+              alt="Recipe"
+              data-testid="recipe-photo"
+              className="img-card"
+            />
+            <h1
+              data-testid="recipe-title"
+              className="recipe-name-details text-white mb-0"
+            >
+              {title}
+            </h1>
+            <p
+              data-testid="recipe-category"
+              className="recipe-category-details mb-0 text-white"
+            >
+              {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category}
+            </p>
+            <div className="fav-share-button-details">
+              {renderShareLikeButton()}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="my-3">
-        <h4>Ingredientes</h4>
-        <ul className="p-3 bg-gray-500 rounded-3">
-          { ingredients.map((ingredient, index) => (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-              className="ms-4"
-            >
-              {ingredient}
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="my-3">
-        <h4>Instrução</h4>
-        <p
-          data-testid="instructions"
-          className="p-3 bg-gray-500 rounded-3"
-        >
-          {instructions}
-        </p>
-      </div>
-      { video && (
-        <div>
-          <h4 data-testid="video">Video</h4>
-          <Video url={ video } />
+        <div className="my-3">
+          <h4>Ingredientes</h4>
+          <ul className="p-3 bg-gray-500 rounded-3">
+            { ingredients.map((ingredient, index) => (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                className="ms-4"
+              >
+                {ingredient}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
-      <div className="mb-4">
-        Recomendacao
-        <div className="recommendations-div">
-          { recommendations.slice(0, MAX_RECOMENDATIONS).map((recommendation, index) => (
-            <Link
-              to={ `/${type === 'bebidas'
-                ? 'comidas' : 'bebidas'}/${recommendation.idMeal
-                  || recommendation.idDrink}` }
-              className="recommendations-card"
-              key={ index }
-              data-testid={ `${index}-recomendation-card` }
-            >
-              <span data-testid={ `${index}-recomendation-title` }>
-                {recommendation.strMeal || recommendation.strDrink}
-              </span>
-            </Link>
-          ))}
+        <div className="my-3">
+          <h4>Instrução</h4>
+          <p
+            data-testid="instructions"
+            className="p-3 bg-gray-500 rounded-3"
+          >
+            {instructions}
+          </p>
+        </div>
+        { video && (
+          <div>
+            <h4 data-testid="video">Video</h4>
+            <Video url={ video } />
+          </div>
+        )}
+        <div className="mb-4">
+          <h4>Recomendacao</h4>
+          <div className="bg-gray-500 rounded-2 p-2">
+            <div className="recommendations-div">
+              {recommendations.slice(0, MAX_RECOMENDATIONS)
+                .map((recommendation, index) => (
+                  <Link
+                    to={ `/${type === 'bebidas'
+                      ? 'comidas' : 'bebidas'}/${recommendation.idMeal
+                      || recommendation.idDrink}` }
+                    className={ `${index === 0 ? 'ms-0' : ''}
+                      ${index === MAX_RECOMENDATIONS - 1 ? 'me-0' : ''}
+                      recommendations-card position-relative` }
+                    key={ index }
+                    data-testid={ `${index}-recomendation-card` }
+                  >
+                    <img
+                      src={ recommendation.strMealThumb || recommendation.strDrinkThumb }
+                      alt="Recomendation"
+                      className="img-recommendation rounded-3"
+                    />
+                    <span
+                      data-testid={ `${index}-recomendation-title` }
+                      className="recipe-name-recommendation text-white h2"
+                    >
+                      {recommendation.strMeal || recommendation.strDrink}
+                    </span>
+                  </Link>
+                ))}
+            </div>
+          </div>
         </div>
       </div>
       <div>
         <button
           type="button"
           data-testid="start-recipe-btn"
-          className="startRecipeButton"
+          className="startRecipeButton btn btn-primary btn-all-width rounded-0 fs-3"
           style={ isDoneRecipe(id) ? { display: 'none' } : {} }
           onClick={ () => history.push(`/${type}/${id}/in-progress`) }
         >
           {isInProgressRecipes(id, type) ? 'Iniciar Receita' : 'Continuar Receita'}
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
