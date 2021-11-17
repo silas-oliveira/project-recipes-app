@@ -13,8 +13,8 @@ function Header(props) {
     <header className="navbar navbar-light bg-light">
       <div className="container nav nav-tabs">
         <img alt="Logo" src={ profileIcon } width="102" height="30" />
-        <span data-testid="page-title" className="h2 text-bolder">{title}</span>
-        <div className="d-flex align-items-center">
+        <span data-testid="page-title" className="custom-h2 text-bolder">{title}</span>
+        <div className="d-flex align-items-center header-right-size justify-content-end">
           <Link to="/perfil">
             <img
               data-testid="profile-top-btn"
@@ -36,7 +36,8 @@ function Header(props) {
                     alt="search Icon"
                   />
                 </button>
-              </div>) : null}
+              </div>
+            ) : null}
         </div>
       </div>
       {showSearch ? <SearchBar local={ title } /> : null}

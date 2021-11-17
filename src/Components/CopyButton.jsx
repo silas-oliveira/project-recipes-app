@@ -15,14 +15,23 @@ function CopyButton(props) {
   };
 
   return (
-    <button
-      type="button"
-      data-testid="share-btn"
-      onClick={ onCopy }
-    >
-      <img src={ shareIcon } alt="compartilhar" />
-      {copy && 'Link copiado!'}
-    </button>
+    <>
+      {copy && <span className="">Link copiado!</span>}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ onCopy }
+        className="remove-button-default-style ms-3"
+      >
+        <img
+          src={ shareIcon }
+          alt="compartilhar"
+          width="40"
+          height="40"
+          className="img-png-border"
+        />
+      </button>
+    </>
   );
 }
 

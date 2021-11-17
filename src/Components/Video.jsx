@@ -3,13 +3,15 @@ import PropTypes from 'prop-types';
 
 function Video({ url }) {
   return (
-    <video controls src={ url }>
-      <track
-        default
-        kind="captions"
-        srcLang="en"
-      />
-    </video>
+    <div className="d-flex justify-content-center mt-3">
+      <video controls src={ url } className="image-container">
+        <track
+          default
+          kind="captions"
+          srcLang="en"
+        />
+      </video>
+    </div>
   );
 }
 

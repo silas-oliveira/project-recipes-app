@@ -39,38 +39,59 @@ function RenderRecipeDetails(props) {
   };
 
   return (
-    <div>
-      <div>
-        <img src={ image } alt="Recipe" data-testid="recipe-photo" />
+    <div className="container">
+      <div className="d-flex justify-content-center">
+        <div className="image-container position-relative mt-2">
+          <img
+            src={ image }
+            alt="Recipe"
+            data-testid="recipe-photo"
+            className="img-card"
+          />
+          <h1
+            data-testid="recipe-title"
+            className="recipe-name-details text-white mb-0"
+          >
+            {title}
+          </h1>
+          <p
+            data-testid="recipe-category"
+            className="recipe-category-details mb-0 text-white"
+          >
+            {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category}
+          </p>
+          <div className="fav-share-button-details">
+            <FavButton recipe={ curFav } dataTestId="favorite-btn" />
+            <CopyButton link={ window.location.href } />
+          </div>
+        </div>
       </div>
-      <div>
-        <h1 data-testid="recipe-title">{title}</h1>
-        <FavButton recipe={ curFav } dataTestId="favorite-btn" />
-        <CopyButton link={ window.location.href } />
-        <p data-testid="recipe-category">
-          {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category }
-        </p>
-      </div>
-      <div>
+      <div className="my-3">
         <h4>Ingredientes</h4>
-        <ul>
+        <ul className="p-3 bg-gray-500 rounded-3">
           { ingredients.map((ingredient, index) => (
             <li
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
+              className="ms-4"
             >
               {ingredient}
             </li>
           ))}
         </ul>
       </div>
-      <div>
+      <div className="my-3">
         <h4>Instrução</h4>
-        <p data-testid="instructions">{instructions}</p>
+        <p
+          data-testid="instructions"
+          className="p-3 bg-gray-500 rounded-3"
+        >
+          {instructions}
+        </p>
       </div>
       { video && (
         <div>
-          <h4 data-testid="video">video</h4>
+          <h4 data-testid="video">Video</h4>
           <Video url={ video } />
         </div>
       )}

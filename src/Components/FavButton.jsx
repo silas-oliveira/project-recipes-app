@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { isFavoriteRecipe, updateFavorite } from '../localStorage';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.png';
+import whiteHeartIcon from '../images/whiteHeartIcon.png';
 
 function FavButton(props) {
   const { recipe, onClick, dataTestId } = props;
@@ -20,10 +20,14 @@ function FavButton(props) {
       data-testid={ dataTestId }
       src={ favorited ? blackHeartIcon : whiteHeartIcon }
       onClick={ () => favButton() }
+      className="remove-button-default-style ms-3"
     >
       <img
         src={ favorited ? blackHeartIcon : whiteHeartIcon }
         alt="Botão favoritar"
+        width="40"
+        height="40"
+        className="img-png-border"
       />
     </button>
   );
