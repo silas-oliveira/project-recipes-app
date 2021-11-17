@@ -68,7 +68,7 @@
 }
 
 
-.btn-all-width, .get-all-space{
+.btn-all-width, .get-all-space {
   width: 100%;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .bg-gray-500 {
-  background-color: #E5E5E5;
+  background-color: #e5e5e5;
 }
 
 .recipe-name-details {
@@ -140,7 +140,7 @@
   text-shadow: 1px 2px 2px black;
 }
 
-.position-absolute, .recipe-name, .recipe-name-details, .recipe-category-details, .fav-share-button-details {
+.recipe-name, .recipe-name-details, .recipe-category-details, .fav-share-button-details {
   position: absolute;
 }
 
@@ -154,22 +154,22 @@
 }
 
 .custom-row {
-  flex-shrink: 0;
-  width: 100%;
   display: flex;
+  flex-shrink: 0;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .header-right-size {
-  width: 102px
+  width: 102px;
 }
 
 .custom-h2 {
   font-size: 2rem;
-  margin-top: 0;
-  margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
 }
 
 .radio1 {
