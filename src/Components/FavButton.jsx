@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { isFavoriteRecipe, updateFavorite } from '../localStorage';
-import blackHeartIcon from '../images/blackHeartIcon.png';
-import whiteHeartIcon from '../images/whiteHeartIcon.png';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 function FavButton(props) {
   const { recipe, onClick, dataTestId } = props;

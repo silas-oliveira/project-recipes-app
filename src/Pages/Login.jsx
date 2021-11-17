@@ -30,7 +30,12 @@ function Login() {
         <p>Login</p>
         <form onSubmit={ handleSubmit }>
           <InputGroup className="mb-3">
-            <InputGroup.Text id="email-input">Email</InputGroup.Text>
+            <InputGroup.Text
+              id="email-input"
+              className="width-login-form"
+            >
+              Email
+            </InputGroup.Text>
             <FormControl
               type="email"
               aria-label="Email"
@@ -42,7 +47,12 @@ function Login() {
             />
           </InputGroup>
           <InputGroup className="mb-3">
-            <InputGroup.Text id="password-input">Senha</InputGroup.Text>
+            <InputGroup.Text
+              id="password-input"
+              className="width-login-form"
+            >
+              Senha
+            </InputGroup.Text>
             <FormControl
               type="password"
               aria-label="Password"
