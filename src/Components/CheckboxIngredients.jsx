@@ -12,20 +12,22 @@ function CheckboxIngredients(props) {
   };
 
   return (
-    <label
-      htmlFor={ ingredient }
-      data-testid={ `${index}-ingredient-step` }
-      className={ checked ? 'checked' : '' }
-    >
-      {ingredient}
-      <input
-        value={ ingredient }
-        type="checkbox"
-        id={ ingredient }
-        checked={ checked }
-        onChange={ handleChangeComponent }
-      />
-    </label>
+    <li className="ms-4">
+      <label
+        htmlFor={ ingredient }
+        data-testid={ `${index}-ingredient-step` }
+        className={ checked ? 'checked' : '' }
+      >
+        {ingredient}
+        <input
+          value={ ingredient }
+          type="checkbox"
+          id={ ingredient }
+          checked={ checked }
+          onChange={ handleChangeComponent }
+        />
+      </label>
+    </li>
   );
 }
 

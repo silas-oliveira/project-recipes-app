@@ -51,12 +51,12 @@ function RenderRecipeDetails(props) {
     <>
       <div className="container">
         <div className="d-flex justify-content-center">
-          <div className="image-container position-relative mt-2">
+          <div className="image-container position-relative mt-3">
             <img
               src={ image }
               alt="Recipe"
               data-testid="recipe-photo"
-              className="img-card"
+              className="img-card border border-secondary"
             />
             <h1
               data-testid="recipe-title"
@@ -75,7 +75,7 @@ function RenderRecipeDetails(props) {
             </div>
           </div>
         </div>
-        <div className="my-3">
+        <div className="my-4">
           <h4>Ingredientes</h4>
           <ul className="p-3 bg-gray-500 rounded-3">
             { ingredients.map((ingredient, index) => (
@@ -89,7 +89,7 @@ function RenderRecipeDetails(props) {
             ))}
           </ul>
         </div>
-        <div className="my-3">
+        <div className="my-4">
           <h4>Instrução</h4>
           <p
             data-testid="instructions"
@@ -99,12 +99,12 @@ function RenderRecipeDetails(props) {
           </p>
         </div>
         { video && (
-          <div>
+          <div className="my-4">
             <h4 data-testid="video">Video</h4>
             <Video url={ video } />
           </div>
         )}
-        <div className="mb-4">
+        <div className="my-4">
           <h4>Recomendacao</h4>
           <div className="bg-gray-500 rounded-2 p-2">
             <div className="recommendations-div">
