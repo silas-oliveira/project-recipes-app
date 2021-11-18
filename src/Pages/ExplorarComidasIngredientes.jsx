@@ -8,11 +8,13 @@ function ExplorarComidasIngredientes() {
   const { mealsIngredients } = useContext(ContextAppReceita);
 
   return (
-    <div>
+    <>
       <Header title="Explorar Ingredientes" />
-      <RenderIngredients ingredients={ mealsIngredients } local="comidas" />
+      <div className="container">
+        <RenderIngredients ingredients={ mealsIngredients } local="comidas" />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

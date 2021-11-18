@@ -9,12 +9,14 @@ function ExplorarComidasOrigem() {
   const { meals } = useContext(ContextAppReceita);
 
   return (
-    <div>
+    <>
       <Header title="Explorar Origem" search />
-      <RenderAreaOptions />
-      <RenderRecipes recipes={ meals } local="comidas" />
+      <div className="container">
+        <RenderAreaOptions />
+        <RenderRecipes recipes={ meals } local="comidas" />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 
