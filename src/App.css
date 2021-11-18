@@ -214,6 +214,10 @@
   top: 0;
 }
 
+.list-style-none {
+  list-style: none;
+}
+
 .image-container {
   width: 60%;
 }
