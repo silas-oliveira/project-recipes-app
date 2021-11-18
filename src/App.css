@@ -148,14 +148,14 @@
 
 .link-copied-list {
   position: absolute;
+  right: 10px;
   top: 24px;
-  right: 9px;
 }
 
 .button-absolute {
   position: absolute;
-  top: 0;
   right: 9px;
+  top: 0;
 }
 
 .bg-gray-500 {
