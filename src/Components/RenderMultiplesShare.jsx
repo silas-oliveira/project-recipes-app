@@ -16,14 +16,25 @@ function RenderMultiplesShare(props) {
   };
 
   return (
-    <button type="button" onClick={ () => shareLink() }>
-      <img
-        src={ shareIcon }
-        data-testid={ `${index}-horizontal-share-btn` }
-        alt="share"
-      />
-      {copied && 'Link copiado!'}
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={ () => shareLink() }
+        className="remove-button-default-style mx-2 my-2"
+      >
+        <img
+          src={ shareIcon }
+          data-testid={ `${index}-horizontal-share-btn` }
+          alt="share"
+        />
+      </button>
+      {copied && (
+        <span
+          className="fs-6 text-color-custom fw-bold font-monospace"
+        >
+          Link copiado!
+        </span>)}
+    </>
   );
 }
 

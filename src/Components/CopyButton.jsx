@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/exploreIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 function CopyButton(props) {
   const [copy, setCopy] = useState(false);
