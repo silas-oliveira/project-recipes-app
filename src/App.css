@@ -78,8 +78,8 @@
 }
 
 .img-card2 {
-  border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
   width: 100%;
 }
 
@@ -128,9 +128,9 @@
 }
 
 .tag-sizing {
-  width: calc(100% - .5rem);
   height: 30px;
-  margin: 0 .5rem;
+  margin: 0 0.5rem;
+  width: calc(100% - 0.5rem);
 }
 
 .recipe-name {
