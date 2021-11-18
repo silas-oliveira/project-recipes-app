@@ -10,7 +10,9 @@ function ExplorarBebidasIngredientes() {
   return (
     <div>
       <Header title="Explorar Ingredientes" />
-      <RenderIngredients ingredients={ drinksIngredients } local="bebidas" />
+      <div className="container">
+        <RenderIngredients ingredients={ drinksIngredients } local="bebidas" />
+      </div>
       <Footer />
     </div>
   );
