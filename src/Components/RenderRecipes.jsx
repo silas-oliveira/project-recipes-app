@@ -10,7 +10,10 @@ function RenderRecipes(props) {
     <div className="row">
       {
         recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-          <div key={ recipe.idDrink || recipe.idMeal } className="col-6 col-lg-4 p-2">
+          <div
+            key={ recipe.idDrink || recipe.idMeal }
+            className="col-12 col-sm-6 col-lg-4 p-2"
+          >
             <div className="shadow-custom border-card-custom position-relative">
               <Link
                 to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }

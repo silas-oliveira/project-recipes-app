@@ -20,7 +20,7 @@ function RenderMultiplesShare(props) {
       <button
         type="button"
         onClick={ () => shareLink() }
-        className="remove-button-default-style mx-2 my-2"
+        className="remove-button-default-style button-absolute"
       >
         <img
           src={ shareIcon }
@@ -30,7 +30,7 @@ function RenderMultiplesShare(props) {
       </button>
       {copied && (
         <span
-          className="fs-6 text-color-custom fw-bold font-monospace"
+          className="fs-6 text-color-custom fw-bold font-monospace link-copied-list"
         >
           Link copiado!
         </span>)}

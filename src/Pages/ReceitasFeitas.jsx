@@ -41,13 +41,6 @@ function ReceitasFeitas() {
           className="img-card2"
         />
         <p
-          data-testid={ `${i}-horizontal-name` }
-          className={ `text-white font-bolder fs-4 font-monospace
-          recipe-name-list text-shadow-custom custom-line-height` }
-        >
-          {recipe.name}
-        </p>
-        <p
           data-testid={ `${i}-horizontal-top-text` }
           className={ `text-white font-bolder fs-6
           font-monospace recipe-name custom-line-height` }
@@ -56,6 +49,18 @@ function ReceitasFeitas() {
             : recipe.alcoholicOrNot}
         </p>
       </>
+    );
+  }
+
+  function renderRecipeName(name, i) {
+    return (
+      <p
+        data-testid={ `${i}-horizontal-name` }
+        className={ `text-color-custom font-bolder fs-4 font-monospace
+          m-2 custom-line-height recipe-name-done overflow-auto` }
+      >
+        {name}
+      </p>
     );
   }
 
@@ -82,10 +87,10 @@ function ReceitasFeitas() {
         </div>
         <div className="row">
           {filterRecipes && filterRecipes.map((recipe, i) => {
-            const { id, doneDate,
-              tags, type } = recipe;
+            const { id, doneDate, tags, type, name } = recipe;
             return (
-              <div key={ id } className="col-6 col-lg-4 p-2">
+              <div key={ id } className="col-6 col-sm-6 col-lg-4 p-2">
+                {/* { mudar aqui, colocar col-12 no lugar de col-6 } */}
                 <div>
                   <div
                     className="shadow-custom border-card-custom2"
@@ -98,32 +103,42 @@ function ReceitasFeitas() {
                         {renderRecipeImgAndDetails(recipe, i)}
                       </Link>
                     </div>
-                    <RenderMultiplesShare
-                      id={ id }
-                      index={ i }
-                      copied={ index === i }
-                      type={ type }
-                      replace="receitas-feitas"
-                      onClick={ () => setIndex(i) }
-                    />
-                    <p
-                      data-testid={ `${i}-horizontal-done-date` }
-                      className="fs-7 mx-2 mb-2 font-monospace"
-                    >
-                      {`Feita em: ${doneDate}`}
-                    </p>
-                    <p className="fs-6 mx-2 my-1 font-bolder overflow-scroll tag-sizing">
-                      Tags:
-                      {tags && tags.length > 0 ? tags.map((tag, idx) => (
-                        <span
-                          key={ idx }
-                          data-testid={ `${i}-${tag}-horizontal-tag` }
-                          className="ms-1"
-                        >
-                          {tag}
-                        </span>
-                      )) : <span className="mx-1">Nenhuma tag</span> }
-                    </p>
+                    <div className="position-relative">
+                      <Link
+                        to={ `${type}s/${id}` }
+                        className="text-decoration-none"
+                      >
+                        {renderRecipeName(name, i)}
+                      </Link>
+                      <RenderMultiplesShare
+                        id={ id }
+                        index={ i }
+                        copied={ index === i }
+                        type={ type }
+                        replace="receitas-feitas"
+                        onClick={ () => setIndex(i) }
+                      />
+                      <p
+                        data-testid={ `${i}-horizontal-done-date` }
+                        className="fs-7 mx-2 mb-2 font-monospace"
+                      >
+                        {`Feita em: ${doneDate}`}
+                      </p>
+                      <p
+                        className="fs-6 mx-2 my-1 font-bolder overflow-scroll tag-sizing"
+                      >
+                        Tags:
+                        {tags && tags.length > 0 ? tags.map((tag, idx) => (
+                          <span
+                            key={ idx }
+                            data-testid={ `${i}-${tag}-horizontal-tag` }
+                            className="ms-1"
+                          >
+                            {tag}
+                          </span>
+                        )) : <span className="mx-1">Nenhuma tag</span> }
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
