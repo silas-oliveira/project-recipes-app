@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import Perfil from '../Pages/Perfil'
+import Perfil from '../Pages/Perfil';
 import renderWithRouter from './renderWithRouter';
 
 describe('Verify profile', () => {
@@ -12,7 +12,7 @@ describe('Verify profile', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
-  
+
   it('Verify if button profile done is on screen', () => {
     const { history } = renderWithRouter(<Perfil />);
     const btnDone = screen.getByTestId('profile-done-btn');
@@ -30,7 +30,7 @@ describe('Verify profile', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/receitas-favoritas');
   });
-  
+
   it('Verify if there is an email on localStorage', () => {
     renderWithRouter(<Perfil />);
     const userLocal = { email: 'email@email.com' };
@@ -38,7 +38,7 @@ describe('Verify profile', () => {
     const user = localStorage.getItem('user');
     expect(user).toStrictEqual('{"email":"email@email.com"}');
   });
-  
+
   it('Verify if email is null', () => {
     renderWithRouter(<Perfil />);
     const userLocal = { '': '' };

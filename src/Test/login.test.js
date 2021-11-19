@@ -72,7 +72,7 @@ describe('1 - Test login page', () => {
   });
 });
 
-describe(`2 - Verify if people can write down his password on input`, () => {
+describe('2 - Verify if people can write down his password on input', () => {
   it('Its possible to write password', () => {
     const { getByTestId } = renderWithRouter(<Login />);
 
@@ -82,7 +82,7 @@ describe(`2 - Verify if people can write down his password on input`, () => {
   });
 });
 
-describe(`3 - Verify if its possible to put email on input`, () => {
+describe('3 - Verify if its possible to put email on input', () => {
   it('Its possible to write email', () => {
     const { getByTestId } = renderWithRouter(<Login />);
 
@@ -92,7 +92,7 @@ describe(`3 - Verify if its possible to put email on input`, () => {
   });
 });
 
-describe(`4 - Verify if saves email on localStorage`, () => {
+describe('4 - Verify if saves email on localStorage', () => {
   it('Verify if it saves on localStorage after submit', () => {
     const { getByTestId } = renderWithRouter(<Login />);
 
