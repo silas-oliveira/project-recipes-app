@@ -26,7 +26,12 @@ function RenderAreaOptions() {
   }
 
   return (
-    <select data-testid="explore-by-area-dropdown" onChange={ changeArea }>
+    <select
+      data-testid="explore-by-area-dropdown"
+      onChange={ changeArea }
+      className="form-select my-3"
+      aria-label="Selecione uma regiao"
+    >
       <option
         value="All"
         data-testid="All-option"

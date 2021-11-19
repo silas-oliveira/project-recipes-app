@@ -11,9 +11,10 @@ function Bebidas() {
   return (
     <>
       <Header title="Bebidas" search />
-      <RenderCategories local="bebidas" />
-      <h1>Bebidas</h1>
-      <RenderRecipes recipes={ drinks } local="bebidas" />
+      <div className="container">
+        <RenderCategories local="bebidas" />
+        <RenderRecipes recipes={ drinks } local="bebidas" />
+      </div>
       <Footer />
     </>
   );

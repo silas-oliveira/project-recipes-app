@@ -41,6 +41,7 @@ function ReceitaComidaEmProcesso(props) {
       ingredients={ recipe.ingredients }
       category={ recipe.strCategory }
       chosenRecipe={ chosenRecipe }
+      video={ recipe.strYoutube }
       type="comida"
     />
   );

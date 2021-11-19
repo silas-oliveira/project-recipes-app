@@ -1,0 +1,11 @@
+.form-signin {
+  height: 100vh;
+  margin: auto;
+  max-width: 330px;
+  padding: 15px;
+  width: 100%;
+}
+
+.width-login-form {
+  width: 70px;
+}

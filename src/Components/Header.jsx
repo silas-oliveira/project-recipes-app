@@ -9,27 +9,50 @@ function Header(props) {
   const { title, search } = props;
   const [showSearch, setShowSearch] = useState(false);
 
+  function renderProfileImg() {
+    return (
+      <img
+        data-testid="profile-top-btn"
+        src={ profileIcon }
+        alt="profile Icon"
+      />
+    );
+  }
+
   return (
-    <header>
-      <span data-testid="page-title">{title}</span>
-      <Link to="/perfil">
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="profile Icon"
-        />
-      </Link>
-      <span data-testid="page-title">Title</span>
-      { search
-        ? (
-          <button type="button" onClick={ () => setShowSearch(!showSearch) }>
-            <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="search Icon"
-            />
-          </button>) : null }
-      { showSearch ? <SearchBar local={ title } /> : null }
+    <header className="navbar navbar-light bg-light">
+      <div className="container nav nav-tabs">
+        <img alt="Logo" src={ profileIcon } width="102" height="30" />
+        <span data-testid="page-title" className="custom-h2 text-bolder">{title}</span>
+        <div className="d-flex align-items-center header-right-size justify-content-end">
+          {search
+            ? (
+              <div className="remove-button-default-style nav-item ms-2">
+                <button
+                  type="button"
+                  onClick={ () => setShowSearch(!showSearch) }
+                  className={ `${showSearch ? 'active' : ''} nav-link` }
+                >
+                  <img
+                    data-testid="search-top-btn"
+                    src={ searchIcon }
+                    alt="search Icon"
+                  />
+                </button>
+              </div>
+            ) : null}
+          <Link to="/perfil">
+            <button
+              type="button"
+              className={ `${title === 'Perfil' ? 'active bg-light custom-active' : ''} 
+              nav-link` }
+            >
+              {renderProfileImg()}
+            </button>
+          </Link>
+        </div>
+      </div>
+      {showSearch ? <SearchBar local={ title } /> : null}
     </header>
   );
 }

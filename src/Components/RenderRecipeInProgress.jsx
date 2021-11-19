@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import FavButton from './FavButton';
 import CopyButton from './CopyButton';
+import Video from './Video';
 import { doneRecipe, setInProgressRecipe, getRecipeInProgress } from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
@@ -17,6 +18,7 @@ function RenderRecipeInProgress(props) {
     category,
     chosenRecipe,
     type,
+    video,
   } = props;
 
   const [checkedIngre, setCheckedIngre] = useState(getRecipeInProgress(id, type));
@@ -54,18 +56,46 @@ function RenderRecipeInProgress(props) {
     return newRecipe;
   };
 
+  function renderShareLikeButton() {
+    return (
+      <>
+        <FavButton recipe={ curRecipe() } dataTestId="favorite-btn" />
+        <CopyButton link={ window.location.href.replace('/in-progress', '') } />
+      </>
+    );
+  }
+
   return (
-    <div>
-      <div>
-        <img src={ image } alt="Recipe" data-testid="recipe-photo" />
-        <div>
-          <h2 data-testid="recipe-title">{title}</h2>
-          <CopyButton link={ window.location.href.replace('/in-progress', '') } />
-          <FavButton recipe={ curRecipe() } dataTestId="favorite-btn" />
+    <>
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <div className="image-container position-relative mt-3">
+            <img
+              src={ image }
+              alt="Recipe"
+              data-testid="recipe-photo"
+              className="img-card border border-secondary"
+            />
+            <h1
+              data-testid="recipe-title"
+              className="recipe-name-details text-white mb-0"
+            >
+              { title }
+            </h1>
+            <p
+              data-testid="recipe-category"
+              className="recipe-category-details mb-0 text-white"
+            >
+              {category}
+            </p>
+            <div className="fav-share-button-details">
+              {renderShareLikeButton()}
+            </div>
+          </div>
         </div>
-        <div>
-          <p data-testid="recipe-category">{category}</p>
-          <div>
+        <div className="my-4">
+          <h4>Ingredientes</h4>
+          <ul className="p-3 bg-gray-500 rounded-3">
             {ingredients && ingredients.map((ingredient, index) => (
               <CheckboxIngredients
                 key={ index }
@@ -75,21 +105,38 @@ function RenderRecipeInProgress(props) {
                 checked={ checkedIngre.includes(ingredient) }
               />
             ))}
+          </ul>
+        </div>
+        <div className="my-4">
+          <h4>Instrução</h4>
+          <p
+            data-testid="instructions"
+            className="p-3 bg-gray-500 rounded-3"
+          >
+            {instructions}
+          </p>
+        </div>
+        {video && (
+          <div className="my-4">
+            <h4 data-testid="video">Video</h4>
+            <Video url={ video } />
           </div>
-        </div>
-        <div>
-          <p data-testid="instructions">{instructions}</p>
-        </div>
+        )}
+      </div>
+      <div>
         <button
           type="button"
           data-testid="finish-recipe-btn"
+          className={ `${ingredients.length !== checkedIngre.length
+            ? 'btn-secondary' : 'btn-primary'}
+            startRecipeButton btn btn-all-width rounded-0 fs-3 opacity-100` }
           disabled={ ingredients.length !== checkedIngre.length }
           onClick={ handleFinishRecipe }
         >
           Finalizar Receita
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -101,6 +148,7 @@ RenderRecipeInProgress.propTypes = {
   image: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  video: PropTypes.string,
   chosenRecipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -111,6 +159,10 @@ RenderRecipeInProgress.propTypes = {
     image: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
+};
+
+RenderRecipeInProgress.defaultProps = {
+  video: null,
 };
 
 export default RenderRecipeInProgress;

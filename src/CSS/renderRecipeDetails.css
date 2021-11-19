@@ -5,13 +5,48 @@
 
 .recommendations-card {
   display: inline-block;
-  padding: 14px;
+  margin: 14px;
   text-align: center;
-  width: 51%;
+  width: calc(51% - 28px);
 }
 
 .startRecipeButton {
   bottom: 0;
   position: fixed;
   width: 100%;
+}
+
+@media only screen and ( max-width : 1399px ) {
+
+  .recommendations-card {
+    width: calc(51% - 26px);
+  }
+}
+
+@media only screen and ( max-width : 1199px ) {
+
+  .recommendations-card {
+    width: calc(51% - 24px);
+  }
+}
+
+@media only screen and ( max-width : 991px ) {
+
+  .recommendations-card {
+    width: calc(51% - 22px);
+  }
+}
+
+@media only screen and ( max-width : 767px ) {
+
+  .recommendations-card {
+    width: calc(51% - 19px);
+  }
+}
+
+@media only screen and ( max-width : 460px ) {
+
+  .recommendations-card {
+    width: calc(51% - 18px);
+  }
 }
