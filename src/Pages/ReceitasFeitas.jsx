@@ -41,26 +41,13 @@ function ReceitasFeitas() {
           className="img-card2"
         />
         <p
-          data-testid={ `${i}-horizontal-top-text` }
-          className={ `text-white font-bolder fs-6
-          font-monospace recipe-name custom-line-height` }
+          data-testid={ `${i}-horizontal-name` }
+          className={ `text-white font-bolder fs-5 text-shadow-custom
+          font-monospace recipe-name-done custom-line-height` }
         >
-          {recipe.type === 'comida' ? `${recipe.area} - ${recipe.category}`
-            : recipe.alcoholicOrNot}
+          {recipe.name}
         </p>
       </>
-    );
-  }
-
-  function renderRecipeName(name, i) {
-    return (
-      <p
-        data-testid={ `${i}-horizontal-name` }
-        className={ `text-color-custom font-bolder fs-4 font-monospace
-          m-2 custom-line-height recipe-name-done overflow-auto` }
-      >
-        {name}
-      </p>
     );
   }
 
@@ -87,7 +74,7 @@ function ReceitasFeitas() {
         </div>
         <div className="row">
           {filterRecipes && filterRecipes.map((recipe, i) => {
-            const { id, doneDate, tags, type, name } = recipe;
+            const { id, doneDate, tags, type } = recipe;
             return (
               <div key={ id } className="col-6 col-sm-6 col-lg-4 p-2">
                 {/* { mudar aqui, colocar col-12 no lugar de col-6 } */}
@@ -103,13 +90,7 @@ function ReceitasFeitas() {
                         {renderRecipeImgAndDetails(recipe, i)}
                       </Link>
                     </div>
-                    <div className="position-relative">
-                      <Link
-                        to={ `${type}s/${id}` }
-                        className="text-decoration-none"
-                      >
-                        {renderRecipeName(name, i)}
-                      </Link>
+                    <div className="position-relative my-2">
                       <RenderMultiplesShare
                         id={ id }
                         index={ i }
@@ -120,12 +101,20 @@ function ReceitasFeitas() {
                       />
                       <p
                         data-testid={ `${i}-horizontal-done-date` }
-                        className="fs-7 mx-2 mb-2 font-monospace"
+                        className="fs-7 ms-2 mb-2 done-date font-monospace"
                       >
                         {`Feita em: ${doneDate}`}
                       </p>
                       <p
-                        className="fs-6 mx-2 my-1 font-bolder overflow-scroll tag-sizing"
+                        data-testid={ `${i}-horizontal-top-text` }
+                        className={ `fw-bold mx-2 mb-2 fs-6 category-done
+                          font-monospace custom-line-height` }
+                      >
+                        {recipe.type === 'comida' ? `${recipe.area} - ${recipe.category}`
+                          : recipe.alcoholicOrNot}
+                      </p>
+                      <p
+                        className="fs-6 mx-2 my-1 font-bolder overflow-auto tag-sizing"
                       >
                         Tags:
                         {tags && tags.length > 0 ? tags.map((tag, idx) => (

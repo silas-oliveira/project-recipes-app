@@ -127,10 +127,18 @@
   position: absolute;
 }
 
+.done-date {
+  margin-right: 40px;
+}
+
 .tag-sizing {
   height: 30px;
   margin: 0 0.5rem;
   width: calc(100% - 0.5rem);
+}
+
+.category-done {
+  height: 20px;
 }
 
 .recipe-name {
@@ -141,9 +149,10 @@
 }
 
 .recipe-name-done {
-  color: #30373b;
-  height: 38px;
-  width: calc(100% - 50px);
+  bottom: 0;
+  font-weight: 700;
+  margin-left: 10px;
+  position: absolute;
 }
 
 .link-copied-list {
