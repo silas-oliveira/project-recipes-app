@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { FormControl, InputGroup } from 'react-bootstrap';
+import { InputGroup } from 'react-bootstrap';
 import { getUser, exitUser } from '../localStorage';
 import userIcon from '../images/user.svg';
 import Header from '../Components/Header';
