@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import ProvideAppReceita from './ContextAPI/ProvideAppReceita';
 import './App.css';
+import './App-no-lint.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './Pages/Login';
 import Comidas from './Pages/Comidas';
