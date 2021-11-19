@@ -52,7 +52,7 @@ function ReceitasFeitas() {
   }
 
   return (
-    <div>
+    <>
       <Header title="Receitas Feitas" />
       <div className="container">
         <div className="row my-3">
@@ -135,7 +135,7 @@ function ReceitasFeitas() {
           })}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
