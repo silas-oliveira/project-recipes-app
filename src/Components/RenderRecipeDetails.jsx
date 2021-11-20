@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { useHistory, Link } from 'react-router-dom';
 import Video from './Video';
 import CopyButton from './CopyButton';
-import {
-  isDoneRecipe,
-  isInProgressRecipes } from '../localStorage';
 import FavButton from './FavButton';
+import RenderStartButton from './RenderStartButton';
+import { isDoneRecipe } from '../localStorage';
 import '../CSS/renderRecipeDetails.css';
 
 const MAX_RECOMENDATIONS = 6;
@@ -37,6 +36,10 @@ function RenderRecipeDetails(props) {
     name: title,
     alcoholicOrNot: alcoholic,
   };
+
+  function onClick() {
+    history.push(`/${type}/${id}/in-progress`);
+  }
 
   function renderShareLikeButton() {
     return (
@@ -138,24 +141,14 @@ function RenderRecipeDetails(props) {
         </div>
       </div>
       <div>
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="startRecipeButton btn btn-primary btn-all-width rounded-0 fs-3"
-          style={ isDoneRecipe(id) ? { display: 'none' } : {} }
-          onClick={ () => history.push(`/${type}/${id}/in-progress`) }
-        >
-          {isInProgressRecipes(id, type) ? 'Continuar Receita' : 'Iniciar Receita' }
-        </button>
-        {isDoneRecipe(id) && (
-          <button
-            type="button"
-            className="startRecipeButton btn btn-primary btn-all-width rounded-0 fs-3"
-            onClick={ () => history.push(`/${type}/${id}/in-progress`) }
-          >
-            Iniciar Receita
-          </button>
-        )}
+        <RenderStartButton
+          onClick={ onClick }
+          withDataTestId
+          id={ id }
+          type={ type }
+        />
+        {isDoneRecipe(id)
+        && <RenderStartButton onClick={ onClick } id={ id } type={ type } />}
       </div>
     </>
   );
