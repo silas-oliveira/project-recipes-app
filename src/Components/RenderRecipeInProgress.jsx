@@ -4,7 +4,12 @@ import { useHistory } from 'react-router-dom';
 import FavButton from './FavButton';
 import CopyButton from './CopyButton';
 import Video from './Video';
-import { doneRecipe, setInProgressRecipe, getRecipeInProgress } from '../localStorage';
+import {
+  doneRecipe,
+  setInProgressRecipe,
+  getRecipeInProgress,
+  removeRecipeInProgress,
+} from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
 
@@ -32,6 +37,7 @@ function RenderRecipeInProgress(props) {
       doneDate,
     };
     doneRecipe(finishedRecipe);
+    removeRecipeInProgress(id, type);
     history.push('/receitas-feitas');
   };
 

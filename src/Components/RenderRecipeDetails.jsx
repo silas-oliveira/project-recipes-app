@@ -147,6 +147,15 @@ function RenderRecipeDetails(props) {
         >
           {isInProgressRecipes(id, type) ? 'Iniciar Receita' : 'Continuar Receita'}
         </button>
+        {isDoneRecipe(id) && (
+          <button
+            type="button"
+            className="startRecipeButton btn btn-primary btn-all-width rounded-0 fs-3"
+            onClick={ () => history.push(`/${type}/${id}/in-progress`) }
+          >
+            Iniciar Receita
+          </button>
+        )}
       </div>
     </>
   );
