@@ -21,7 +21,7 @@ function Header(props) {
 
   return (
     <header className="navbar navbar-light bg-light">
-      <div className="container nav nav-tabs">
+      <div className="container nav nav-tabs pe-0">
         <img alt="Logo" src={ profileIcon } width="102" height="30" />
         <span data-testid="page-title" className="custom-h2 text-bolder">{title}</span>
         <div className="d-flex align-items-center header-right-size justify-content-end">
@@ -41,7 +41,7 @@ function Header(props) {
                 </button>
               </div>
             ) : null}
-          <Link to="/perfil">
+          <Link to="/perfil" className="me-3">
             <button
               type="button"
               className={ `${title === 'Perfil' ? 'active bg-light custom-active' : ''} 

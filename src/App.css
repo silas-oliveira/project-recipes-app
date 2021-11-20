@@ -316,7 +316,7 @@
   }
 }
 
-@media only screen and ( max-width : 315px ) {
+@media only screen and ( max-width : 340px ) {
 
   .custom-h2 {
     display: none;
