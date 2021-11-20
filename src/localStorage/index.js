@@ -80,9 +80,9 @@ export function isInProgressRecipes(id, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (!inProgressRecipes) return false;
   if (type === 'comidas') {
-    return Object.keys(inProgressRecipes.meals).some((key) => key.id === id);
+    return Object.keys(inProgressRecipes.meals).some((key) => key === id);
   }
-  return Object.keys(inProgressRecipes.cocktails).some((key) => key.id === id);
+  return Object.keys(inProgressRecipes.cocktails).some((key) => key === id);
 }
 
 export function getRecipeInProgress(id, type) {

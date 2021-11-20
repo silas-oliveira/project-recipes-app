@@ -145,7 +145,7 @@ function RenderRecipeDetails(props) {
           style={ isDoneRecipe(id) ? { display: 'none' } : {} }
           onClick={ () => history.push(`/${type}/${id}/in-progress`) }
         >
-          {isInProgressRecipes(id, type) ? 'Iniciar Receita' : 'Continuar Receita'}
+          {isInProgressRecipes(id, type) ? 'Continuar Receita' : 'Iniciar Receita' }
         </button>
         {isDoneRecipe(id) && (
           <button
