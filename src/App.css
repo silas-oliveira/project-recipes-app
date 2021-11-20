@@ -67,6 +67,15 @@
   }
 }
 
+.logo-header-div {
+  height: 35px;
+  width: 102px;
+}
+
+.logo-header-img {
+  height: 35px;
+  width: 47px;
+}
 
 .btn-all-width, .get-all-space {
   width: 100%;

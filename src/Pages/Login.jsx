@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
 import { addCocktailsToken, addMealsToken, saveUser } from '../localStorage';
 import '../CSS/login.css';
+import logo from '../images/masterDev-logo.svg';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -27,7 +28,9 @@ function Login() {
   return (
     <div className="form-signin d-flex align-items-center">
       <div className="border border-light rounded-3 shadow p-4">
-        <p>Login</p>
+        <div className="row mb-4 justify-content-center">
+          <img src={ logo } alt="site logo" className="col-11" />
+        </div>
         <form onSubmit={ handleSubmit }>
           <InputGroup className="mb-3">
             <InputGroup.Text
