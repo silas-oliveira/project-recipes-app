@@ -30,9 +30,13 @@ export function exitUser() {
 
 export function doneRecipe(recipe) {
   const actualDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const doneRecipes = actualDoneRecipes
-    ? JSON.stringify([...actualDoneRecipes, recipe]) : JSON.stringify([recipe]);
-  localStorage.setItem('doneRecipes', doneRecipes);
+  if (actualDoneRecipes) {
+    const newDoneRecipes = actualDoneRecipes
+      .filter((curRecipe) => curRecipe.id !== recipe.id);
+    localStorage.setItem('doneRecipes', JSON.stringify([...newDoneRecipes, recipe]));
+  } else {
+    localStorage.setItem('doneRecipes', JSON.stringify([recipe]));
+  }
 }
 
 export function catchDoneRecipes() {
@@ -61,13 +65,24 @@ export function setInProgressRecipe(id, array, type) {
   }
 }
 
+export function removeRecipeInProgress(id, type) {
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!inProgressRecipes) return false;
+  if (type === 'comida') {
+    delete inProgressRecipes.meals[id];
+  } else {
+    delete inProgressRecipes.cocktails[id];
+  }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+}
+
 export function isInProgressRecipes(id, type) {
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (!inProgressRecipes) return false;
   if (type === 'comidas') {
-    return Object.keys(inProgressRecipes.meals).some((key) => key.id === id);
+    return Object.keys(inProgressRecipes.meals).some((key) => key === id);
   }
-  return Object.keys(inProgressRecipes.cocktails).some((key) => key.id === id);
+  return Object.keys(inProgressRecipes.cocktails).some((key) => key === id);
 }
 
 export function getRecipeInProgress(id, type) {

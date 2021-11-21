@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import logo from '../images/masterDev-logo-min.svg';
 import SearchBar from './SeachBar';
 
 function Header(props) {
@@ -21,8 +22,10 @@ function Header(props) {
 
   return (
     <header className="navbar navbar-light bg-light">
-      <div className="container nav nav-tabs">
-        <img alt="Logo" src={ profileIcon } width="102" height="30" />
+      <div className="container nav nav-tabs pe-0">
+        <Link to="/comidas" className="logo-header-div">
+          <img alt="Logo" src={ logo } className="logo-header-img ms-3" />
+        </Link>
         <span data-testid="page-title" className="custom-h2 text-bolder">{title}</span>
         <div className="d-flex align-items-center header-right-size justify-content-end">
           {search
@@ -41,7 +44,7 @@ function Header(props) {
                 </button>
               </div>
             ) : null}
-          <Link to="/perfil">
+          <Link to="/perfil" className="me-3">
             <button
               type="button"
               className={ `${title === 'Perfil' ? 'active bg-light custom-active' : ''} 

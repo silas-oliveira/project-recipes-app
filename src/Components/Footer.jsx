@@ -9,11 +9,11 @@ function Footer() {
   return (
     <footer className="footer bg-light" data-testid="footer">
       <div className="container d-flex justify-content-between">
-        <Link to="/bebidas">
+        <Link to="/comidas">
           <img
-            data-testid="drinks-bottom-btn"
-            src={ drinkIcon }
-            alt="drink"
+            data-testid="food-bottom-btn"
+            src={ mealIcon }
+            alt="meal"
           />
         </Link>
         <Link to="/explorar">
@@ -23,11 +23,11 @@ function Footer() {
             alt="explore"
           />
         </Link>
-        <Link to="/comidas">
+        <Link to="/bebidas">
           <img
-            data-testid="food-bottom-btn"
-            src={ mealIcon }
-            alt="meal"
+            data-testid="drinks-bottom-btn"
+            src={ drinkIcon }
+            alt="drink"
           />
         </Link>
       </div>

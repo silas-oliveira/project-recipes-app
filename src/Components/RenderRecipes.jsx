@@ -1,4 +1,5 @@
 import React from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -14,26 +15,31 @@ function RenderRecipes(props) {
             key={ recipe.idDrink || recipe.idMeal }
             className="col-12 col-sm-6 col-lg-4 p-2"
           >
-            <div className="shadow-custom border-card-custom position-relative">
-              <Link
-                to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
-                data-testid={ `${index}-recipe-card` }
-                className="text-decoration-none"
+            <FadeIn>
+              <div
+                className={ `shadow-custom border-card-custom position-relative
+                min-card-height` }
               >
-                <img
-                  src={ recipe.strDrinkThumb || recipe.strMealThumb }
-                  alt={ local === 'bebidas' ? 'Drink' : 'Food' }
-                  data-testid={ `${index}-card-img` }
-                  className="img-card"
-                />
-                <p
-                  data-testid={ `${index}-card-name` }
-                  className="text-white font-bolder fs-3 font-monospace recipe-name"
+                <Link
+                  to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
+                  data-testid={ `${index}-recipe-card` }
+                  className="text-decoration-none"
                 >
-                  {recipe.strDrink || recipe.strMeal}
-                </p>
-              </Link>
-            </div>
+                  <img
+                    src={ recipe.strDrinkThumb || recipe.strMealThumb }
+                    alt={ local === 'bebidas' ? 'Drink' : 'Food' }
+                    data-testid={ `${index}-card-img` }
+                    className="img-card"
+                  />
+                  <p
+                    data-testid={ `${index}-card-name` }
+                    className="text-white font-bolder fs-3 font-monospace recipe-name"
+                  >
+                    {recipe.strDrink || recipe.strMeal}
+                  </p>
+                </Link>
+              </div>
+            </FadeIn>
           </div>
         ))
       }

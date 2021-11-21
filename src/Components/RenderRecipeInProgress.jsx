@@ -4,7 +4,12 @@ import { useHistory } from 'react-router-dom';
 import FavButton from './FavButton';
 import CopyButton from './CopyButton';
 import Video from './Video';
-import { doneRecipe, setInProgressRecipe, getRecipeInProgress } from '../localStorage';
+import {
+  doneRecipe,
+  setInProgressRecipe,
+  getRecipeInProgress,
+  removeRecipeInProgress,
+} from '../localStorage';
 import CheckboxIngredients from './CheckboxIngredients';
 import '../CSS/recipeInProgress.css';
 
@@ -19,6 +24,7 @@ function RenderRecipeInProgress(props) {
     chosenRecipe,
     type,
     video,
+    alcoholic,
   } = props;
 
   const [checkedIngre, setCheckedIngre] = useState(getRecipeInProgress(id, type));
@@ -32,6 +38,7 @@ function RenderRecipeInProgress(props) {
       doneDate,
     };
     doneRecipe(finishedRecipe);
+    removeRecipeInProgress(id, type);
     history.push('/receitas-feitas');
   };
 
@@ -86,7 +93,7 @@ function RenderRecipeInProgress(props) {
               data-testid="recipe-category"
               className="recipe-category-details mb-0 text-white"
             >
-              {category}
+              {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category}
             </p>
             <div className="fav-share-button-details">
               {renderShareLikeButton()}
@@ -149,6 +156,7 @@ RenderRecipeInProgress.propTypes = {
   category: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   video: PropTypes.string,
+  alcoholic: PropTypes.string,
   chosenRecipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -163,6 +171,7 @@ RenderRecipeInProgress.propTypes = {
 
 RenderRecipeInProgress.defaultProps = {
   video: null,
+  alcoholic: null,
 };
 
 export default RenderRecipeInProgress;

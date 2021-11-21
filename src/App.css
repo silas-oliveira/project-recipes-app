@@ -67,6 +67,15 @@
   }
 }
 
+.logo-header-div {
+  height: 35px;
+  width: 102px;
+}
+
+.logo-header-img {
+  height: 35px;
+  width: 47px;
+}
 
 .btn-all-width, .get-all-space {
   width: 100%;
@@ -81,6 +90,10 @@
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   width: 100%;
+}
+
+.min-card-height {
+  min-height: 150px;
 }
 
 .shadow-custom {
@@ -149,7 +162,7 @@
 
 .category-fav {
   height: 30px;
-  line-height: 90%;
+  line-height: 104%;
 }
 
 .recipe-name {
@@ -208,7 +221,7 @@
 }
 
 .custom-line-height {
-  line-height: 80%;
+  line-height: 104%;
 }
 
 .recipe-name, .recipe-name-details, .recipe-category-details {
@@ -316,7 +329,7 @@
   }
 }
 
-@media only screen and ( max-width : 315px ) {
+@media only screen and ( max-width : 340px ) {
 
   .custom-h2 {
     display: none;

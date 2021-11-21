@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import PropTypes from 'prop-types';
 import { getById } from '../services/requestApi';
 import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
+import Loading from '../Components/Loading';
 
 function ReceitaComidaEmProcesso(props) {
   const [recipe, setRecipe] = useState({});
@@ -31,19 +33,21 @@ function ReceitaComidaEmProcesso(props) {
     tags: tags || [],
   };
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <Loading />;
   return (
-    <RenderRecipeInProgress
-      id={ recipe.idMeal }
-      title={ recipe.strMeal }
-      image={ recipe.strMealThumb }
-      instructions={ recipe.strInstructions }
-      ingredients={ recipe.ingredients }
-      category={ recipe.strCategory }
-      chosenRecipe={ chosenRecipe }
-      video={ recipe.strYoutube }
-      type="comida"
-    />
+    <FadeIn>
+      <RenderRecipeInProgress
+        id={ recipe.idMeal }
+        title={ recipe.strMeal }
+        image={ recipe.strMealThumb }
+        instructions={ recipe.strInstructions }
+        ingredients={ recipe.ingredients }
+        category={ recipe.strCategory }
+        chosenRecipe={ chosenRecipe }
+        video={ recipe.strYoutube }
+        type="comida"
+      />
+    </FadeIn>
   );
 }
 
