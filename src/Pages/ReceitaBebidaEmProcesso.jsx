@@ -3,6 +3,7 @@ import FadeIn from 'react-fade-in/lib/FadeIn';
 import PropTypes from 'prop-types';
 import { getById } from '../services/requestApi';
 import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
+import Loading from '../Components/Loading';
 
 function ReceitaBebidaEmProcesso(props) {
   const [recipe, setRecipe] = useState({});
@@ -32,7 +33,7 @@ function ReceitaBebidaEmProcesso(props) {
     tags: tags || [],
   };
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <Loading />;
   return (
     <FadeIn>
       <RenderRecipeInProgress

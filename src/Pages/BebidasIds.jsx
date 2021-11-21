@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import FadeIn from 'react-fade-in/lib/FadeIn';
 import { getById, getMeals } from '../services/requestApi';
 import RenderRecipeDetails from '../Components/RenderRecipeDetails';
+import Loading from '../Components/Loading';
 
 function BebidasIds(props) {
   const [drink, setDrink] = useState({});
@@ -22,7 +23,7 @@ function BebidasIds(props) {
     getDrink();
   }, [props]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   return (
     <FadeIn>
       <RenderRecipeDetails
