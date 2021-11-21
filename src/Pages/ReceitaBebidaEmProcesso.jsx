@@ -41,6 +41,7 @@ function ReceitaBebidaEmProcesso(props) {
       ingredients={ recipe.ingredients }
       category={ recipe.strAlcoholic || recipe.strCategory }
       chosenRecipe={ chosenRecipe }
+      alcoholic={ recipe.strAlcoholic }
       type="bebida"
     />
   );

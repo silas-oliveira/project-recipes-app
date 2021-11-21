@@ -162,7 +162,7 @@
 
 .category-fav {
   height: 30px;
-  line-height: 90%;
+  line-height: 104%;
 }
 
 .recipe-name {
@@ -221,7 +221,7 @@
 }
 
 .custom-line-height {
-  line-height: 80%;
+  line-height: 104%;
 }
 
 .recipe-name, .recipe-name-details, .recipe-category-details {

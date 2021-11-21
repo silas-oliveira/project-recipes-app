@@ -24,6 +24,7 @@ function RenderRecipeInProgress(props) {
     chosenRecipe,
     type,
     video,
+    alcoholic,
   } = props;
 
   const [checkedIngre, setCheckedIngre] = useState(getRecipeInProgress(id, type));
@@ -59,6 +60,7 @@ function RenderRecipeInProgress(props) {
   const curRecipe = () => {
     const newRecipe = { ...chosenRecipe };
     delete newRecipe.tags;
+    console.log(newRecipe)
     return newRecipe;
   };
 
@@ -92,7 +94,7 @@ function RenderRecipeInProgress(props) {
               data-testid="recipe-category"
               className="recipe-category-details mb-0 text-white"
             >
-              {category}
+              {alcoholic === 'Alcoholic' ? `${alcoholic}! ${category}` : category}
             </p>
             <div className="fav-share-button-details">
               {renderShareLikeButton()}
@@ -155,6 +157,7 @@ RenderRecipeInProgress.propTypes = {
   category: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   video: PropTypes.string,
+  alcoholic: PropTypes.string,
   chosenRecipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -169,6 +172,7 @@ RenderRecipeInProgress.propTypes = {
 
 RenderRecipeInProgress.defaultProps = {
   video: null,
+  alcoholic: null,
 };
 
 export default RenderRecipeInProgress;

@@ -15,6 +15,7 @@ function ReceitasFavoritas() {
 
   useEffect(() => {
     setFavorites(getFavorites());
+    console.log(getFavorites())
   }, []);
 
   const handleClick = (e) => {
@@ -130,7 +131,9 @@ function ReceitasFavoritas() {
                       font-monospace overflow-auto` }
                     data-testid={ `${index}-horizontal-top-text` }
                   >
-                    {favorite.area ? `${favorite.area} - ${favorite.category}`
+                    {favorite.area || favorite.alcoholicOrNot
+                      ? `${favorite.area
+                        || favorite.alcoholicOrNot} - ${favorite.category}`
                       : favorite.category}
                   </p>
                 </div>
