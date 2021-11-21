@@ -99,7 +99,7 @@ function ReceitasFavoritas() {
           {favorites !== null && favorites.map((favorite, index) => (
             <div key={ index } className="col-6 col-sm-6 col-lg-4 p-2">
               {/* { mudar aqui, colocar col-12 no lugar de col-6 } */}
-              <div className="shadow-custom border-card-custom2">
+              <div className="shadow-custom border-card-custom2 min-card-height">
                 <div className="position-relative">
                   <Link
                     to={ `/${favorite.type}s/${favorite.id}` }
@@ -130,7 +130,8 @@ function ReceitasFavoritas() {
                       font-monospace overflow-auto` }
                     data-testid={ `${index}-horizontal-top-text` }
                   >
-                    {`${favorite.area || favorite.alcoholicOrNot} - ${favorite.category}`}
+                    {favorite.area ? `${favorite.area} - ${favorite.category}`
+                      : favorite.category}
                   </p>
                 </div>
               </div>

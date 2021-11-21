@@ -14,7 +14,10 @@ function RenderRecipes(props) {
             key={ recipe.idDrink || recipe.idMeal }
             className="col-12 col-sm-6 col-lg-4 p-2"
           >
-            <div className="shadow-custom border-card-custom position-relative">
+            <div
+              className={ `shadow-custom border-card-custom position-relative
+              min-card-height` }
+            >
               <Link
                 to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
                 data-testid={ `${index}-recipe-card` }

@@ -80,7 +80,7 @@ function ReceitasFeitas() {
                 {/* { mudar aqui, colocar col-12 no lugar de col-6 } */}
                 <div>
                   <div
-                    className="shadow-custom border-card-custom2"
+                    className="shadow-custom border-card-custom2 min-card-height"
                   >
                     <div className="position-relative">
                       <Link

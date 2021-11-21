@@ -70,7 +70,7 @@ function Perfil() {
             <InputGroup.Text>Email</InputGroup.Text>
             <p
               data-testid="profile-email"
-              className="bg-white form-control text-center m-0"
+              className="bg-white form-control text-center m-0 overflow-auto"
             >
               { email }
             </p>

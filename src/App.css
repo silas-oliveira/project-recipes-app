@@ -92,6 +92,10 @@
   width: 100%;
 }
 
+.min-card-height {
+  min-height: 150px;
+}
+
 .shadow-custom {
   box-shadow: 1px 2.5px 3px rgba(0, 0, 0, 0.5);
 }
