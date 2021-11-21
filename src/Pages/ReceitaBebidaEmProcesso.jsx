@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import PropTypes from 'prop-types';
 import { getById } from '../services/requestApi';
 import RenderRecipeInProgress from '../Components/RenderRecipeInProgress';
@@ -33,17 +34,19 @@ function ReceitaBebidaEmProcesso(props) {
 
   if (loading) return <div>Carregando...</div>;
   return (
-    <RenderRecipeInProgress
-      id={ recipe.idDrink }
-      title={ recipe.strDrink }
-      image={ recipe.strDrinkThumb }
-      instructions={ recipe.strInstructions }
-      ingredients={ recipe.ingredients }
-      category={ recipe.strAlcoholic || recipe.strCategory }
-      chosenRecipe={ chosenRecipe }
-      alcoholic={ recipe.strAlcoholic }
-      type="bebida"
-    />
+    <FadeIn>
+      <RenderRecipeInProgress
+        id={ recipe.idDrink }
+        title={ recipe.strDrink }
+        image={ recipe.strDrinkThumb }
+        instructions={ recipe.strInstructions }
+        ingredients={ recipe.ingredients }
+        category={ recipe.strAlcoholic || recipe.strCategory }
+        chosenRecipe={ chosenRecipe }
+        alcoholic={ recipe.strAlcoholic }
+        type="bebida"
+      />
+    </FadeIn>
   );
 }
 
