@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import { useHistory } from 'react-router';
 import PropTypes from 'prop-types';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
@@ -30,24 +31,27 @@ function RenderIngredients(props) {
           key={ index }
           data-testid={ `${index}-ingredient-card` }
           onClick={ () => onClick(ingredient.strIngredient1) }
-          className="col-6 col-sm-4 col-md-3 col-xl-2 p-2 remove-button-default-style"
+          className={ `col-6 col-sm-4 col-md-3 col-xl-2 p-2 remove-button-default-style
+          min-card-height` }
         >
-          <div className="shadow-custom border-card-custom">
-            <img
-              src={ `${local === 'bebidas'
-                ? 'https://www.thecocktaildb.com' : 'https://www.themealdb.com'}/images/ingredients/${ingredient.strIngredient1}-Small.png` }
-              alt={ ingredient.strIngredient1 }
-              data-testid={ `${index}-card-img` }
-              className="mt-3"
-            />
-            <p
-              data-testid={ `${index}-card-name` }
-              className={ `fw-bold mx-2 my-3 fs-6 category-fav
-                font-monospace overflow-auto` }
-            >
-              {ingredient.strIngredient1}
-            </p>
-          </div>
+          <FadeIn>
+            <div className="shadow-custom border-card-custom">
+              <img
+                src={ `${local === 'bebidas'
+                  ? 'https://www.thecocktaildb.com' : 'https://www.themealdb.com'}/images/ingredients/${ingredient.strIngredient1}-Small.png` }
+                alt={ ingredient.strIngredient1 }
+                data-testid={ `${index}-card-img` }
+                className="mt-3"
+              />
+              <p
+                data-testid={ `${index}-card-name` }
+                className={ `fw-bold mx-2 my-3 fs-6 category-fav
+                  font-monospace overflow-auto` }
+              >
+                {ingredient.strIngredient1}
+              </p>
+            </div>
+          </FadeIn>
         </button>
       ))}
     </div>
