@@ -15,7 +15,6 @@ function ReceitasFavoritas() {
 
   useEffect(() => {
     setFavorites(getFavorites());
-    console.log(getFavorites())
   }, []);
 
   const handleClick = (e) => {

@@ -42,7 +42,6 @@ function RenderRecipeDetails(props) {
   }
 
   function renderShareLikeButton() {
-    console.log(curFav)
     return (
       <>
         <FavButton recipe={ curFav } dataTestId="favorite-btn" />

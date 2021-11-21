@@ -60,7 +60,6 @@ function RenderRecipeInProgress(props) {
   const curRecipe = () => {
     const newRecipe = { ...chosenRecipe };
     delete newRecipe.tags;
-    console.log(newRecipe)
     return newRecipe;
   };
 
