@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ContextAppReceita from '../ContextAPI/ContextAppReceita';
@@ -11,9 +12,12 @@ function Bebidas() {
   return (
     <>
       <Header title="Bebidas" search />
-      <RenderCategories local="bebidas" />
-      <h1>Bebidas</h1>
-      <RenderRecipes recipes={ drinks } local="bebidas" />
+      <FadeIn>
+        <div className="container">
+          <RenderCategories local="bebidas" />
+          <RenderRecipes recipes={ drinks } local="bebidas" />
+        </div>
+      </FadeIn>
       <Footer />
     </>
   );

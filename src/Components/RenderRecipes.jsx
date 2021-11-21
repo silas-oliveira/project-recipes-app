@@ -1,4 +1,5 @@
 import React from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -7,24 +8,39 @@ const MAX_RECIPES = 12;
 function RenderRecipes(props) {
   const { recipes, local } = props;
   return (
-    <div>
+    <div className="row">
       {
         recipes.slice(0, MAX_RECIPES).map((recipe, index) => (
-          <Link
-            to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
+          <div
             key={ recipe.idDrink || recipe.idMeal }
-            data-testid={ `${index}-recipe-card` }
+            className="col-12 col-sm-6 col-lg-4 p-2"
           >
-            <img
-              src={ recipe.strDrinkThumb || recipe.strMealThumb }
-              alt={ local === 'bebidas' ? 'Drink' : 'Food' }
-              data-testid={ `${index}-card-img` }
-              className="card-img"
-            />
-            <span data-testid={ `${index}-card-name` }>
-              {recipe.strDrink || recipe.strMeal}
-            </span>
-          </Link>
+            <FadeIn>
+              <div
+                className={ `shadow-custom border-card-custom position-relative
+                min-card-height` }
+              >
+                <Link
+                  to={ `/${local}/${recipe.idDrink || recipe.idMeal}` }
+                  data-testid={ `${index}-recipe-card` }
+                  className="text-decoration-none"
+                >
+                  <img
+                    src={ recipe.strDrinkThumb || recipe.strMealThumb }
+                    alt={ local === 'bebidas' ? 'Drink' : 'Food' }
+                    data-testid={ `${index}-card-img` }
+                    className="img-card"
+                  />
+                  <p
+                    data-testid={ `${index}-card-name` }
+                    className="text-white font-bolder fs-3 font-monospace recipe-name"
+                  >
+                    {recipe.strDrink || recipe.strMeal}
+                  </p>
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
         ))
       }
     </div>

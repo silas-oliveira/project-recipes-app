@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import { getById, getMeals } from '../services/requestApi';
 import RenderRecipeDetails from '../Components/RenderRecipeDetails';
+import Loading from '../Components/Loading';
 
 function BebidasIds(props) {
   const [drink, setDrink] = useState({});
@@ -21,19 +23,21 @@ function BebidasIds(props) {
     getDrink();
   }, [props]);
 
-  if (loading) return <h1>Loading...</h1>;
+  if (loading) return <Loading />;
   return (
-    <RenderRecipeDetails
-      id={ drink.idDrink }
-      image={ drink.strDrinkThumb }
-      title={ drink.strDrink }
-      category={ drink.strCategory }
-      alcoholic={ drink.strAlcoholic }
-      ingredients={ drink.ingredients }
-      instructions={ drink.strInstructions }
-      recommendations={ recomendations }
-      type="bebidas"
-    />
+    <FadeIn>
+      <RenderRecipeDetails
+        id={ drink.idDrink }
+        image={ drink.strDrinkThumb }
+        title={ drink.strDrink }
+        category={ drink.strCategory }
+        alcoholic={ drink.strAlcoholic }
+        ingredients={ drink.ingredients }
+        instructions={ drink.strInstructions }
+        recommendations={ recomendations }
+        type="bebidas"
+      />
+    </FadeIn>
   );
 }
 

@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactPlayer from 'react-player';
 
 function Video({ url }) {
   return (
-    <video controls src={ url }>
-      <track
-        default
-        kind="captions"
-        srcLang="en"
+    <div
+      className="d-flex justify-content-center mt-3 player-wrapper"
+      data-testid="video"
+    >
+      <ReactPlayer
+        width="100%"
+        height="100%"
+        className="react-player"
+        url={ url }
+        controls
       />
-    </video>
+    </div>
   );
 }
 

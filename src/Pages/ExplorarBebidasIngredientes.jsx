@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import FadeIn from 'react-fade-in/lib/FadeIn';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import RenderIngredients from '../Components/RenderIngredients';
@@ -10,7 +11,11 @@ function ExplorarBebidasIngredientes() {
   return (
     <div>
       <Header title="Explorar Ingredientes" />
-      <RenderIngredients ingredients={ drinksIngredients } local="bebidas" />
+      <FadeIn>
+        <div className="container">
+          <RenderIngredients ingredients={ drinksIngredients } local="bebidas" />
+        </div>
+      </FadeIn>
       <Footer />
     </div>
   );
