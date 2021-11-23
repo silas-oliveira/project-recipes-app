@@ -2,5 +2,3 @@ src/App.test.js
 src/serviceWorker.js 
 cypress/*
 coverage/*
-stc/Test/mocks/*
-src/Test/mockFetch.js
