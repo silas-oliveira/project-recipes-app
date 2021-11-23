@@ -8,7 +8,7 @@ import App from '../App';
 import mealsMock from './mocks/meals';
 import drinksMock from './mocks/drinks';
 
-const MAX_RECIPES = 12;
+const MAX_RECIPES = 4;
 
 describe('Recipe-list meals', () => {
   beforeEach(() => {
@@ -16,13 +16,13 @@ describe('Recipe-list meals', () => {
     history.push('/comidas');
   });
 
-  it('should render 12 recipes', async () => {
+  it('should render 4 recipes', async () => {
     expect((await screen.findAllByTestId(/-recipe-card/)).length).toBe(MAX_RECIPES);
     expect((await screen.findAllByTestId(/-card-img/)).length).toBe(MAX_RECIPES);
     expect((await screen.findAllByTestId(/-card-name/)).length).toBe(MAX_RECIPES);
   });
 
-  it('should render the first 12 recipes', async () => {
+  it('should render the first 4 recipes', async () => {
     const recipesNames = await screen.findAllByTestId(/-card-name/);
     const recipesIMG = await screen.findAllByTestId(/-card-img/);
     recipesNames.forEach((recipe, index) => {
@@ -35,7 +35,7 @@ describe('Recipe-list meals', () => {
 });
 
 describe('Recipe-list drinks', () => {
-  it('should render 12 recipes', async () => {
+  it('should render 4 recipes', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
     expect((await screen.findAllByTestId(/-recipe-card/)).length).toBe(MAX_RECIPES);
@@ -43,7 +43,7 @@ describe('Recipe-list drinks', () => {
     expect((await screen.findAllByTestId(/-card-name/)).length).toBe(MAX_RECIPES);
   });
 
-  it('should render the first 12 recipes', async () => {
+  it('should render the first 4 recipes', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
     const recipesNames = await screen.findAllByTestId(/-card-name/);
