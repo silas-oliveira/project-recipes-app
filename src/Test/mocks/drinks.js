@@ -497,7 +497,7 @@ const drinks = {
     },
     {
       'idDrink': '13938',
-      'strDrink': 'AT&T',
+      'strDrink': 'ATET',
       'strDrinkAlternate': null,
       'strDrinkES': null,
       'strDrinkDE': null,
