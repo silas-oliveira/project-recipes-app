@@ -89,22 +89,14 @@ describe('Favorite Recipes page', () => {
 
   it('Should show only drinks when "Drink" filter button is clicked', async () => {
     const drinkFilterBtn = await screen.findByTestId('filter-by-drink-btn');
-    const foodImage = await screen.queryByAltText(favoriteRecipes[0].name);
-    const drinkImage = await screen.queryByAltText(favoriteRecipes[1].name);
-    const firstElement = await screen.findByTestId(image1);
+    const names = screen.queryAllByTestId(/-horizontal-name/);
 
-    expect(foodImage).toBeInTheDocument();
-    expect(drinkImage).toBeInTheDocument();
-
-    expect(firstElement.alt).toBe(favoriteRecipes[0].name);
+    expect(names[0]).toBeInTheDocument();
+    expect(names[1]).toBeInTheDocument();
 
     fireEvent.click(drinkFilterBtn);
-
-    const newFirstElement = await screen.findByTestId(image1);
-
-    // expect(foodImage).not.toBeInTheDocument();
-    expect(drinkImage).toBeInTheDocument();
-
-    expect(newFirstElement.alt).toBe(favoriteRecipes[1].name);
+    expect(names[1]).not.toBeInTheDocument();
+    expect(names[0]).toBeInTheDocument();
+    expect(names[0].innerHTML).toContain(favoriteRecipes[1].name);
   });
 });
