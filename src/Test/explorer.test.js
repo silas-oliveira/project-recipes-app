@@ -78,3 +78,20 @@ describe('Explorer', () => {
     await waitFor(() => expect(history.location.pathname).toBe('/bebidas/178319'));
   });
 });
+
+describe('render recipe ingredients', () => {
+  it('should render bebidas ingredients', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(EXPLORAR_BEBIDAS);
+    fireEvent.click(screen.getByTestId(BY_INGREDIENTS));
+    expect(history.location.pathname).toBe('/explorar/bebidas/ingredientes');
+  });
+
+  it('should redirect correctly', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push(EXPLORAR_BEBIDAS);
+
+    fireEvent.click(screen.getByTestId(SURPRISE));
+    await waitFor(() => expect(history.location.pathname).toBe('/bebidas/178319'));
+  });
+});
