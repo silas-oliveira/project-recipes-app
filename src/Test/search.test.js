@@ -91,7 +91,7 @@ describe('Alert and redirect if only have 1 recipe', () => {
       .toHaveBeenCalledWith('Sua busca deve conter somente 1 (um) caracter');
   });
 
-  it('should redirect to recipe details if only have one', async () => {
+  it('should redirect to recipe details if only have one drink', async () => {
     const { history } = renderWithRouter(<App />);
     history.push('/bebidas');
     fireEvent.click(screen.getByTestId(TOP_BUTTON));
@@ -102,5 +102,18 @@ describe('Alert and redirect if only have 1 recipe', () => {
     fireEvent.click(screen.queryByTestId(radioButtons[1]));
     fireEvent.click(screen.queryByTestId(BUTTON));
     await waitFor(() => expect(history.location.pathname).toBe('/bebidas/178319'));
+  });
+
+  it('should redirect to recipe details if only have one meal', async () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/comidas');
+    fireEvent.click(screen.getByTestId(TOP_BUTTON));
+    fireEvent.change(
+      screen.queryByTestId(SEARCH_INPUT),
+      { target: { value: 'Arrabiata' } },
+    );
+    fireEvent.click(screen.queryByTestId(radioButtons[1]));
+    fireEvent.click(screen.queryByTestId(BUTTON));
+    await waitFor(() => expect(history.location.pathname).toBe('/comidas/52771'));
   });
 });
