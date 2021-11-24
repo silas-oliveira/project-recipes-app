@@ -6,6 +6,8 @@ import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
+const image1 = '0-horizontal-image';
+
 describe('Done Recipes page', () => {
   const doneRecipes = [
     {
@@ -44,7 +46,7 @@ describe('Done Recipes page', () => {
 
   it(`Should have recipe image, name, category, area, done date,
     first tags, and a share button if the recipe is a food`, async () => {
-    const foodImage = await screen.findByTestId('0-horizontal-image');
+    const foodImage = await screen.findByTestId(image1);
     const foodName = await screen.findByTestId('0-horizontal-name');
     const foodInfo = await screen.findByTestId('0-horizontal-top-text');
     const foodDoneDate = await screen.findByTestId('0-horizontal-done-date');
@@ -78,7 +80,7 @@ describe('Done Recipes page', () => {
     const drinkFilterBtn = await screen.findByTestId('filter-by-drink-btn');
     const foodImage = await screen.queryByAltText(doneRecipes[0].name);
     const drinkImage = await screen.queryByAltText(doneRecipes[1].name);
-    const firstElement = await screen.findByTestId('0-horizontal-image');
+    const firstElement = await screen.findByTestId(image1);
 
     expect(foodImage).toBeInTheDocument();
     expect(drinkImage).toBeInTheDocument();
@@ -87,12 +89,11 @@ describe('Done Recipes page', () => {
 
     fireEvent.click(drinkFilterBtn);
 
-    const newFirstElement = await screen.findByTestId('0-horizontal-image');
+    const newFirstElement = await screen.findByTestId(image1);
 
     expect(foodImage).not.toBeInTheDocument();
     expect(drinkImage).toBeInTheDocument();
 
     expect(newFirstElement.alt).toBe(doneRecipes[1].name);
-
   });
 });
