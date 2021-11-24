@@ -2,7 +2,7 @@ import React from 'react';
 import './mockFetch';
 import '@testing-library/jest-dom';
 import 'jest-canvas-mock';
-import { screen } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
@@ -45,6 +45,54 @@ describe('Done Recipes page', () => {
   it(`Should have recipe image, name, category, area, done date,
     first tags, and a share button if the recipe is a food`, async () => {
     const foodImage = await screen.findByTestId('0-horizontal-image');
+    const foodName = await screen.findByTestId('0-horizontal-name');
+    const foodInfo = await screen.findByTestId('0-horizontal-top-text');
+    const foodDoneDate = await screen.findByTestId('0-horizontal-done-date');
+    const foodFirstTag = await screen.findByTestId('0-Pasta-horizontal-tag');
+    const shareButton = await screen.findByTestId('0-horizontal-share-btn');
+
     expect(foodImage).toBeInTheDocument();
+    expect(foodName).toBeInTheDocument();
+    expect(foodInfo.innerHTML)
+      .toBe(`${doneRecipes[0].area} - ${doneRecipes[0].category}`);
+    expect(foodDoneDate).toBeInTheDocument();
+    expect(foodFirstTag.innerHTML).toBe(doneRecipes[0].tags[0]);
+    expect(shareButton).toBeInTheDocument();
+  });
+
+  it('Should show only food when the "Food" filter button is clicked', async () => {
+    const foodFilterBtn = await screen.findByTestId('filter-by-food-btn');
+    const foodImage = await screen.queryByAltText(doneRecipes[0].name);
+    const drinkImage = await screen.queryByAltText(doneRecipes[1].name);
+
+    expect(foodImage).toBeInTheDocument();
+    expect(drinkImage).toBeInTheDocument();
+
+    fireEvent.click(foodFilterBtn);
+
+    expect(foodImage).toBeInTheDocument();
+    expect(drinkImage).not.toBeInTheDocument();
+  });
+
+  it('Should show only drinks when "Drink" filter button is clicked', async () => {
+    const drinkFilterBtn = await screen.findByTestId('filter-by-drink-btn');
+    const foodImage = await screen.queryByAltText(doneRecipes[0].name);
+    const drinkImage = await screen.queryByAltText(doneRecipes[1].name);
+    const firstElement = await screen.findByTestId('0-horizontal-image');
+
+    expect(foodImage).toBeInTheDocument();
+    expect(drinkImage).toBeInTheDocument();
+
+    expect(firstElement.alt).toBe(doneRecipes[0].name);
+
+    fireEvent.click(drinkFilterBtn);
+
+    const newFirstElement = await screen.findByTestId('0-horizontal-image');
+
+    expect(foodImage).not.toBeInTheDocument();
+    expect(drinkImage).toBeInTheDocument();
+
+    expect(newFirstElement.alt).toBe(doneRecipes[1].name);
+
   });
 });
