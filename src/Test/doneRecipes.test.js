@@ -93,6 +93,5 @@ describe('Done Recipes page', () => {
     expect(drinkImage).toBeInTheDocument();
 
     expect(newFirstElement.alt).toBe(doneRecipes[1].name);
-
   });
 });
