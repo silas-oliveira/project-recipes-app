@@ -36,27 +36,5 @@ describe('in Progress recipe', () => {
     fireEvent.click(finishButton);
 
     expect(history.location.pathname).toBe('/receitas-feitas');
-
-    history.push('/comidas/178319');
-
-    fireEvent.click(startButton);
-
-    expect(history.location.pathname).toBe('/comidas/52771/in-progress');
-
-    expect(recipeTitle).toBeInTheDocument();
-    expect(recipeTitle).toHaveTextContent('Aquamarine');
-
-    expect(finishButton).toBeDisabled();
-
-    for (let i = 0; i < RECIPE_INGREDIENTS; i += 1) {
-      const ingredient = screen.getByTestId(`${i}-ingredient-step`);
-      fireEvent.click(ingredient);
-    }
-
-    expect(finishButton).toBeEnabled();
-
-    fireEvent.click(finishButton);
-
-    expect(history.location.pathname).toBe('/receitas-feitas');
   });
 });
