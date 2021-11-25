@@ -58,7 +58,7 @@ function RenderCategories(props) {
           </Button>
         </div>
       ))}
-      <div className="p-1 col-sm-6 col-md-4 col-xl-2">
+      <div className="p-1 col-sm-6 col-md-4 col-xl-1">
         <Button
           data-testid="All-category-filter"
           type="button"
